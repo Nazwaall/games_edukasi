@@ -1,17 +1,17 @@
-// LocalStorage State Manager
-// Handles automatic game progress persistence & reset logic
+// LocalStorage State Manager for Knowledge Quest Adventure Game
 
-const STORAGE_KEY = "UJI_PENGETAHUAN_RANK_GAME_V1";
+const STORAGE_KEY = "KNOWLEDGE_QUEST_ADVENTURE_V1";
 
 const DEFAULT_STATE = {
   currentRank: "Bronze",
-  currentLevel: 1,
+  unlockedRanks: ["Bronze"],   // ['Bronze', 'Silver', 'Gold', 'Diamond', 'Master', 'Mythic']
+  completedMaps: [],           // ['Bronze', 'Silver', ...]
   xp: 0,
   stars: 3,
-  highScore: 0,
+  completedCheckpoints: [],    // e.g. [1, 2]
+  unlockedGates: [],           // e.g. [1, 2]
+  playerPos: { x: 120, y: 550 },
   bestStreak: 0,
-  unlockedRanks: ["Bronze"],
-  completedLevels: [],
   soundEnabled: true
 };
 
@@ -19,11 +19,8 @@ class StorageManager {
   static load() {
     try {
       const data = localStorage.getItem(STORAGE_KEY);
-      if (!data) {
-        return { ...DEFAULT_STATE };
-      }
+      if (!data) return { ...DEFAULT_STATE };
       const parsed = JSON.parse(data);
-      // Merge defaults in case new properties were added
       return { ...DEFAULT_STATE, ...parsed };
     } catch (e) {
       console.warn("Failed to read localStorage:", e);

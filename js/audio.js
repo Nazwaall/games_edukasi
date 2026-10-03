@@ -1,13 +1,12 @@
-// Web Audio API Sound Synthesizer
-// Generates instant responsive game sounds (zero external file loading issues)
+// Web Audio API Sound Synthesizer for Knowledge Quest Adventure Game
 
 class SoundEngine {
   constructor() {
     this.ctx = null;
     this.enabled = true;
+    this.lastFootstep = 0;
   }
 
-  // Lazy initialize AudioContext on first user touch/click
   init() {
     if (!this.ctx) {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -24,7 +23,62 @@ class SoundEngine {
     this.enabled = !!state;
   }
 
-  // Play crisp button click
+  // Play subtle step sound when walking
+  playFootstep() {
+    if (!this.enabled) return;
+    const now = Date.now();
+    if (now - this.lastFootstep < 280) return; // limit footstep frequency
+    this.lastFootstep = now;
+
+    this.init();
+    if (!this.ctx) return;
+
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(140 + Math.random() * 30, this.ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(60, this.ctx.currentTime + 0.04);
+
+    gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start();
+    osc.stop(this.ctx.currentTime + 0.04);
+  }
+
+  // Play Gate Opening Sound Effect
+  playGateUnlock() {
+    if (!this.enabled) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const notes = [261.63, 329.63, 392.00, 523.25]; // C4, E4, G4, C5
+    let time = this.ctx.currentTime;
+
+    notes.forEach((freq, idx) => {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+
+      gain.gain.setValueAtTime(0, time + idx * 0.08);
+      gain.gain.linearRampToValueAtTime(0.25, time + idx * 0.08 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, time + idx * 0.08 + 0.3);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(time + idx * 0.08);
+      osc.stop(time + idx * 0.08 + 0.3);
+    });
+  }
+
+  // Button click
   playClick() {
     if (!this.enabled) return;
     this.init();
@@ -47,13 +101,13 @@ class SoundEngine {
     osc.stop(this.ctx.currentTime + 0.05);
   }
 
-  // Play pleasant ascending chime for correct answer
+  // Correct answer chime
   playCorrect() {
     if (!this.enabled) return;
     this.init();
     if (!this.ctx) return;
 
-    const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+    const notes = [523.25, 659.25, 783.99, 1046.50];
     notes.forEach((freq, idx) => {
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
@@ -74,7 +128,7 @@ class SoundEngine {
     });
   }
 
-  // Play low error buzz for wrong answer
+  // Wrong answer buzzer
   playWrong() {
     if (!this.enabled) return;
     this.init();
@@ -97,69 +151,8 @@ class SoundEngine {
     osc.stop(this.ctx.currentTime + 0.25);
   }
 
-  // Play hype fire cascade for streak multiplier
-  playStreak() {
-    if (!this.enabled) return;
-    this.init();
-    if (!this.ctx) return;
-
-    const freqs = [440, 554.37, 659.25, 880, 1108.73];
-    freqs.forEach((f, i) => {
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-
-      osc.type = 'sine';
-      osc.frequency.value = f;
-
-      const t = this.ctx.currentTime + i * 0.06;
-      gain.gain.setValueAtTime(0, t);
-      gain.gain.linearRampToValueAtTime(0.25, t + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
-
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-
-      osc.start(t);
-      osc.stop(t + 0.3);
-    });
-  }
-
-  // Play Level Complete Fanfare
+  // Level completion fanfare
   playLevelComplete() {
-    if (!this.enabled) return;
-    this.init();
-    if (!this.ctx) return;
-
-    const melody = [
-      { f: 523.25, d: 0.15 }, // C5
-      { f: 659.25, d: 0.15 }, // E5
-      { f: 783.99, d: 0.15 }, // G5
-      { f: 1046.50, d: 0.4 }  // C6
-    ];
-
-    let now = this.ctx.currentTime;
-    melody.forEach((note) => {
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-
-      osc.type = 'triangle';
-      osc.frequency.value = note.f;
-
-      gain.gain.setValueAtTime(0.25, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + note.d);
-
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-
-      osc.start(now);
-      osc.stop(now + note.d);
-
-      now += note.d * 0.85;
-    });
-  }
-
-  // Play Rank Up Epic Fanfare
-  playRankUp() {
     if (!this.enabled) return;
     this.init();
     if (!this.ctx) return;

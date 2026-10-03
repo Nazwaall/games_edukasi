@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Uji Pengetahuan Umum: Rank Bronze to Mythic</title>
+  <title>KNOWLEDGE QUEST: Rank Bronze → Mythic</title>
 
   <!-- Google Fonts: Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,17 +14,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Ambient Particle Canvas -->
+  <!-- Ambient Particle Canvas Backdrop -->
   <canvas id="particle-canvas"></canvas>
 
   <div id="app-container">
     <!-- Top Header Bar -->
     <header id="game-header">
       <div class="logo-area" id="header-logo-btn">
-        <span class="logo-icon">🎓</span>
+        <span class="logo-icon">🧠</span>
         <div class="logo-text">
-          <span class="title">UJI PENGETAHUAN</span>
-          <span class="subtitle">RANK TRIVIA</span>
+          <span class="title">KNOWLEDGE QUEST</span>
+          <span class="subtitle">ADVENTURE MAP</span>
         </div>
       </div>
 
@@ -50,21 +50,21 @@
     <!-- MAIN SCREENS CONTAINER -->
     <main id="main-view">
       
-      <!-- ================= 1. LANDING / HOME SCREEN ================= -->
+      <!-- ================= 1. HOME SCREEN ================= -->
       <section id="home-screen" class="screen active">
         <div class="home-content">
-          <div class="title-badge-pill">✨ GAMIFIED ACADEMIC TRIVIA ✨</div>
+          <div class="title-badge-pill">✨ 2D TOP-DOWN ADVENTURE QUIZ ✨</div>
           
           <h1 class="main-title">
-            UJI PENGETAHUAN UMUM
-            <span class="highlight-text">RANK BRONZE TO MYTHIC</span>
+            KNOWLEDGE QUEST
+            <span class="highlight-text">BRONZE → MYTHIC</span>
           </h1>
-          <p class="main-subtitle">"Seberapa tinggi rank pengetahuanmu?"</p>
+          <p class="main-subtitle">"Explore. Learn. Rank Up."</p>
 
-          <!-- Character Display Area -->
+          <!-- Character Mascot Avatar Display -->
           <div class="character-wrapper">
             <div class="speech-bubble bounce-in" id="home-speech-bubble">
-              Ready? Let's test your knowledge! 🚀
+              Ready? Let's explore Bronze Forest! 🌲
             </div>
             <div id="home-character-container" class="character-container"></div>
           </div>
@@ -73,7 +73,7 @@
           <div class="home-cta-group">
             <button id="btn-play-now" class="btn btn-primary btn-large btn-glow">
               <span class="btn-icon">🎮</span>
-              <span class="btn-text">PLAY NOW</span>
+              <span class="btn-text">PLAY BRONZE MAP</span>
             </button>
 
             <button id="btn-materi-preview" class="btn btn-secondary btn-materi">
@@ -82,7 +82,7 @@
             </button>
           </div>
 
-          <!-- Navigation Sub-Buttons -->
+          <!-- Sub Navigation -->
           <div class="home-sub-nav">
             <button id="btn-ranks-ladder" class="btn btn-sub">
               <span>🏆 RANKS</span>
@@ -101,31 +101,25 @@
       <section id="materi-screen" class="screen">
         <div class="materi-header-section">
           <h2 class="materi-title">📚 MATERI & PREVIEW SOAL</h2>
-          <p class="materi-subtitle">"Kenali materi yang akan kamu hadapi sebelum naik ke Mythic!"</p>
+          <p class="materi-subtitle">"Kenali materi yang akan kamu hadapi sebelum menjelajah map!"</p>
 
-          <!-- Character Helper Speech -->
+          <!-- Rank Selector Tabs for Materi -->
+          <div class="materi-rank-tabs" id="materi-rank-tabs">
+            <!-- Dynamically populated tabs: Bronze, Silver, Gold, Diamond, Master, Mythic -->
+          </div>
+
+          <!-- Character Helper Bar -->
           <div class="materi-character-bar">
             <div id="materi-character-container" class="small-character-container"></div>
             <div class="speech-bubble small-bubble" id="materi-speech-bubble">
-              Coba lihat contoh soalnya dulu! Soal di preview ini berbeda dengan kuis utama lho! 🔥
+              Coba contoh soal di halaman ini sebelum menjelajah map! 🔥
             </div>
           </div>
         </div>
 
-        <!-- Filter Rank Tabs -->
-        <div class="filter-tabs-wrapper">
-          <button class="filter-tab active" data-rank="ALL">ALL</button>
-          <button class="filter-tab" data-rank="Bronze">🥉 BRONZE</button>
-          <button class="filter-tab" data-rank="Silver">🥈 SILVER</button>
-          <button class="filter-tab" data-rank="Gold">🥇 GOLD</button>
-          <button class="filter-tab" data-rank="Diamond">💎 DIAMOND</button>
-          <button class="filter-tab" data-rank="Master">👑 MASTER</button>
-          <button class="filter-tab" data-rank="Mythic">🌌 MYTHIC</button>
-        </div>
-
         <!-- Materi Rank Cards Grid -->
         <div id="materi-cards-grid" class="materi-cards-grid">
-          <!-- Dynamically Generated via App JS -->
+          <!-- Dynamically Generated -->
         </div>
 
         <!-- Interactive Preview Section -->
@@ -133,186 +127,65 @@
           <div class="preview-mode-banner">
             <span>⚡ PREVIEW MODE — No XP / No Rank Progress</span>
           </div>
-          
           <h3 class="preview-section-title">🔍 SPILL SOALNYA! (Coba Jawab Preview Soal)</h3>
-
           <div id="preview-questions-list">
-            <!-- Dynamically populated sample questions -->
+            <!-- Dynamically populated -->
           </div>
         </div>
 
-        <!-- Bottom Action Bar -->
         <div class="materi-bottom-actions">
           <button id="btn-back-home-materi" class="btn btn-sub btn-back">
             <span>← BACK TO HOME</span>
           </button>
           <button id="btn-ready-play-now" class="btn btn-primary btn-large btn-glow">
-            <span>🎮 I'M READY — PLAY NOW</span>
+            <span>🎮 PLAY BRONZE MAP</span>
           </button>
         </div>
       </section>
 
-      <!-- ================= 3. GAMEPLAY SCREEN ================= -->
+      <!-- ================= 3. GAMEPLAY CANVAS ADVENTURE SCREEN ================= -->
       <section id="gameplay-screen" class="screen">
-        <!-- Top Game HUD Bar -->
+        <!-- Top HUD Bar -->
         <div class="game-hud">
-          <div class="hud-item rank-item">
-            <span class="hud-label">Rank</span>
-            <div class="hud-value" id="hud-rank-name">
-              <span id="hud-rank-icon">🥉</span>
-              <span id="hud-rank-text">Bronze</span>
-            </div>
-          </div>
-
-          <div class="hud-item level-item">
-            <span class="hud-label">Level</span>
-            <div class="hud-value" id="hud-level-num">1</div>
-          </div>
-
-          <div class="hud-item q-counter-item">
-            <span class="hud-label">Question</span>
-            <div class="hud-value" id="hud-q-count">1/10</div>
-          </div>
-
-          <!-- Countdown Timer Badge -->
-          <div class="hud-item timer-item" id="hud-timer-box">
-            <span class="hud-label">Waktu</span>
-            <div class="hud-value timer-value" id="hud-timer-num">
-              <span class="timer-icon">⏳</span>
-              <span id="hud-timer-sec">20s</span>
-            </div>
+          <div class="hud-item objective-item">
+            <span class="hud-label">TARGET OBJECTIVE</span>
+            <div class="hud-value objective-value" id="hud-objective-text">Find Question 01</div>
           </div>
 
           <div class="hud-item stars-item">
-            <span class="hud-label">Stars</span>
+            <span class="hud-label">STARS</span>
             <div class="hud-value stars-display" id="hud-stars-display">⭐⭐⭐</div>
           </div>
 
-          <div class="hud-item streak-item" id="hud-streak-box">
-            <span class="streak-badge" id="hud-streak-text">🔥 STREAK x0</span>
+          <div class="hud-item xp-item">
+            <span class="hud-label">XP</span>
+            <div class="hud-value highlight" id="hud-xp-display">0 XP</div>
           </div>
         </div>
 
-        <!-- Timer Progress Bar -->
-        <div class="timer-bar-container">
-          <div class="timer-bar-fill" id="timer-bar-fill" style="width: 100%;"></div>
+        <!-- Nearby Checkpoint Alert Banner -->
+        <div id="nearby-prompt-banner" class="nearby-prompt-banner hidden">
+          <span>❓ QUESTION NEARBY!</span>
         </div>
 
-        <!-- XP Progress Bar -->
-        <div class="xp-bar-container">
-          <div class="xp-bar-label">
-            <span>XP Progress</span>
-            <span id="xp-bar-text">0 / 1000 XP</span>
-          </div>
-          <div class="xp-bar-track">
-            <div class="xp-bar-fill" id="xp-bar-fill" style="width: 0%;"></div>
-          </div>
+        <!-- Main 2D Game Canvas Viewport (Single-Frame Map) -->
+        <div class="canvas-viewport-wrapper">
+          <canvas id="game-canvas" width="1000" height="650"></canvas>
         </div>
 
-        <!-- Character Reactions Area -->
-        <div class="gameplay-character-section">
-          <div id="gameplay-character-container" class="character-container medium-character"></div>
-          <div class="speech-bubble bounce-in" id="gameplay-speech-bubble">
-            Ayo konsentrasi dan pilih jawaban terbaikmu sebelum waktu habis! ⏳
+        <!-- Touch Virtual D-Pad for Mobile Controllers -->
+        <div id="virtual-dpad" class="virtual-dpad-container">
+          <div class="dpad-btn dpad-up" id="dpad-up">▲</div>
+          <div class="dpad-row-middle">
+            <div class="dpad-btn dpad-left" id="dpad-left">◀</div>
+            <div class="dpad-center">●</div>
+            <div class="dpad-btn dpad-right" id="dpad-right">▶</div>
           </div>
-        </div>
-
-        <!-- Main Question Card -->
-        <div class="question-card" id="question-card">
-          <div class="question-meta">
-            <span class="category-pill" id="q-category">🔬 Sains</span>
-            <span class="difficulty-tag" id="q-difficulty">Difficulty: Bronze</span>
-          </div>
-
-          <h2 class="question-text" id="q-text">Planet terbesar dalam tata surya kita adalah...</h2>
-
-          <!-- 4 Answer Options -->
-          <div class="options-grid" id="options-grid">
-            <button class="option-btn" data-index="0">
-              <span class="opt-key">A</span>
-              <span class="opt-text">Bumi</span>
-            </button>
-            <button class="option-btn" data-index="1">
-              <span class="opt-key">B</span>
-              <span class="opt-text">Mars</span>
-            </button>
-            <button class="option-btn" data-index="2">
-              <span class="opt-key">C</span>
-              <span class="opt-text">Jupiter</span>
-            </button>
-            <button class="option-btn" data-index="3">
-              <span class="opt-key">D</span>
-              <span class="opt-text">Venus</span>
-            </button>
-          </div>
-
-          <!-- Answer Feedback Banner & Explanation -->
-          <div id="feedback-panel" class="feedback-panel hidden">
-            <div class="feedback-status" id="feedback-status">CORRECT!</div>
-            <p class="feedback-explanation" id="feedback-explanation">
-              Jupiter adalah planet terbesar di tata surya.
-            </p>
-            <button id="btn-next-question" class="btn btn-primary btn-next">
-              <span>CONTINUE ➔</span>
-            </button>
-          </div>
+          <div class="dpad-btn dpad-down" id="dpad-down">▼</div>
         </div>
       </section>
 
-      <!-- ================= 4. RESULT SCREEN ================= -->
-      <section id="result-screen" class="screen">
-        <div class="result-card">
-          <div class="result-header" id="result-header">
-            <h1 class="result-banner-title" id="result-banner-title">🎉 LEVEL COMPLETE!</h1>
-            <p class="result-banner-sub" id="result-banner-sub">Kamu berhasil menyelesaikan tantangan level ini!</p>
-          </div>
-
-          <!-- Character Result Pose -->
-          <div class="result-character-wrapper">
-            <div id="result-character-container" class="character-container medium-character"></div>
-          </div>
-
-          <!-- Detailed Stats Grid -->
-          <div class="stats-grid">
-            <div class="stat-box">
-              <span class="stat-label">Total Score</span>
-              <span class="stat-value" id="res-score">850 / 1000</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-label">Accuracy</span>
-              <span class="stat-value" id="res-accuracy">80%</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-label">Correct / Wrong</span>
-              <span class="stat-value" id="res-correct-wrong">8 / 2</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-label">Best Streak</span>
-              <span class="stat-value" id="res-best-streak">5 🔥</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-label">Stars Earned</span>
-              <span class="stat-value" id="res-stars">⭐⭐⭐</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-label">XP Earned</span>
-              <span class="stat-value highlight" id="res-xp">+850 XP</span>
-            </div>
-          </div>
-
-          <!-- Result Actions -->
-          <div class="result-actions">
-            <button id="btn-result-main" class="btn btn-primary btn-large btn-glow">
-              <span id="btn-result-main-text">NEXT LEVEL ➔</span>
-            </button>
-            <button id="btn-result-home" class="btn btn-secondary">
-              <span>🏠 MAIN MENU</span>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- ================= 5. RANK LADDER SCREEN ================= -->
+      <!-- ================= 4. RANK LADDER SCREEN ================= -->
       <section id="rank-screen" class="screen">
         <div class="rank-ladder-header">
           <h2>🏆 RANK LADDER PROGRESSION</h2>
@@ -337,59 +210,210 @@
 
     <!-- ================= MODALS ================= -->
 
-    <!-- How To Play Modal -->
-    <div id="how-to-play-modal" class="modal-overlay hidden">
-      <div class="modal-card">
+    <!-- Question Modal -->
+    <div id="question-modal" class="modal-overlay hidden">
+      <div class="modal-card question-modal-card">
         <div class="modal-header">
-          <h3>🎮 HOW TO PLAY</h3>
-          <button class="modal-close-btn">&times;</button>
+          <h3 id="modal-q-title">CHECKPOINT 01</h3>
+          <span class="category-pill" id="modal-q-category">🔬 Sains</span>
+        </div>
+
+        <div class="question-meta-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="difficulty-tag" id="modal-q-difficulty">Difficulty: Bronze</span>
+          <div class="timer-badge" id="modal-q-timer-badge">
+            <span class="timer-icon">⏳</span>
+            <span id="modal-q-timer-sec">20s</span>
+          </div>
+        </div>
+
+        <!-- Animated Countdown Timer Bar -->
+        <div class="timer-bar-container">
+          <div class="timer-bar-fill" id="modal-q-timer-bar"></div>
+        </div>
+
+        <h2 class="modal-question-text" id="modal-q-text">Planet terbesar dalam tata surya adalah...</h2>
+
+        <div class="options-grid" id="modal-options-grid">
+          <button class="option-btn" data-index="0">
+            <span class="opt-key">A</span>
+            <span class="opt-text">Bumi</span>
+          </button>
+          <button class="option-btn" data-index="1">
+            <span class="opt-key">B</span>
+            <span class="opt-text">Mars</span>
+          </button>
+          <button class="option-btn" data-index="2">
+            <span class="opt-key">C</span>
+            <span class="opt-text">Jupiter</span>
+          </button>
+          <button class="option-btn" data-index="3">
+            <span class="opt-key">D</span>
+            <span class="opt-text">Venus</span>
+          </button>
+        </div>
+
+        <div id="modal-feedback-panel" class="feedback-panel hidden">
+          <div class="feedback-status" id="modal-feedback-status">CORRECT!</div>
+          <p class="feedback-explanation" id="modal-feedback-explanation">Explanation text...</p>
+          <button id="btn-continue-question" class="btn btn-primary btn-large btn-glow" style="margin-top: 14px; width: 100%;">
+            <span>LANJUTKAN PETUALANGAN ➔</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Failure Modal (Retry Map from Q1) -->
+    <div id="failure-modal" class="modal-overlay hidden">
+      <div class="modal-card failure-modal-card">
+        <div class="modal-header">
+          <h3>💀 BINTANG HABIS!</h3>
         </div>
         <div class="modal-body">
-          <div class="info-step">
-            <span class="step-num">1</span>
-            <div>
-              <h4>Jawab Soal & Cepat Waktu</h4>
-              <p>Mulai dari 🥉 Bronze (SD) sampai ke 🌌 Mythic (Final Rank). Setiap soal memiliki countdown timer 20 detik!</p>
+          <p>Semua bintangmu telah habis di map ini! Kamu harus mengulang petualangan dari <strong>Question 01</strong>. Bintangmu telah dipulihkan kembali ke ⭐⭐⭐.</p>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-retry-checkpoint" class="btn btn-primary btn-large btn-glow" style="width: 100%;">
+            <span>🔄 ULANG DARI QUESTION 01</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bronze Map Complete Modal -->
+    <div id="bronze-complete-modal" class="modal-overlay hidden">
+      <div class="modal-card victory-modal-card">
+        <div class="sparkle-title" id="victory-sparkle-title">✨ BRONZE FOREST MASTERED! ✨</div>
+        <h1 class="rank-achieved-text" id="victory-title-text">🎉 BRONZE MAP COMPLETE!</h1>
+        <p class="modal-body-text" id="victory-body-text">Kamu telah berhasil menyelesaikan rute Bronze Forest & menguasai Knowledge Shrine!</p>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-label">Checkpoints Completed</span>
+            <span class="stat-value">5 / 5 ✅</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Stars Earned</span>
+            <span class="stat-value" id="res-stars-earned">⭐⭐⭐</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Total XP</span>
+            <span class="stat-value highlight" id="res-total-xp">+500 XP</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Best Streak</span>
+            <span class="stat-value" id="res-best-streak">5 🔥</span>
+          </div>
+        </div>
+
+        <div class="next-rank-banner" id="victory-next-rank-banner">
+          <span>🔓 MAP SILVER CANYON UNLOCKED!</span>
+        </div>
+
+        <div class="modal-footer" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+          <button id="btn-next-rank-silver" class="btn btn-primary btn-large btn-glow">
+            <span>🗺️ LANJUT KE MAP SILVER ➔</span>
+          </button>
+          <button id="btn-continue-bronze-complete" class="btn btn-secondary">
+            <span>🏠 KEMBALI KE HOME</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- How To Play Modal -->
+    <div id="how-to-play-modal" class="modal-overlay hidden">
+      <div class="modal-card pretty-modal-card">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <span class="modal-badge-pill">📖 PANDUAN PETUALANGAN</span>
+            <h3>🎮 HOW TO PLAY</h3>
+          </div>
+          <button class="modal-close-btn">&times;</button>
+        </div>
+        <div class="modal-body fancy-modal-body">
+          <div class="info-step-card">
+            <div class="step-badge">1</div>
+            <div class="step-content">
+              <h4>🏃 Jelajahi Map Single-Frame & Kontrol Karakter</h4>
+              <p>Gunakan <strong>WASD / Arrow Keys</strong> di laptop atau <strong>Virtual D-Pad</strong> di HP untuk berjalan di rute map 2D petualanganmu.</p>
             </div>
           </div>
-          <div class="info-step">
-            <span class="step-num">2</span>
-            <div>
-              <h4>Sistem Bintang ⭐ & Streak 🔥</h4>
-              <p>Setiap level mulai dengan 3 bintang. Salah 2x beruntun atau kehabisan waktu berkurang 1 bintang. Jawab benar berturut-turut untuk bonus Streak XP!</p>
+          <div class="info-step-card">
+            <div class="step-badge">2</div>
+            <div class="step-content">
+              <h4>❓ Cari Checkpoint Soal & Buka Gerbang Fisik 🔒</h4>
+              <p>Dekati checkpoint ❓ untuk menjawab kuis. Jawab benar untuk dapat +XP dan <strong>membuka pintu gerbang fisik (Gate 1 - Gate 4)</strong> ke area berikutnya!</p>
             </div>
           </div>
-          <div class="info-step">
-            <span class="step-num">3</span>
-            <div>
-              <h4>Maskot Game & Rank Up</h4>
-              <p>Maskotmu akan mendapat aura glowing & rank badge baru setiap kali kamu berhasil naik rank!</p>
+          <div class="info-step-card">
+            <div class="step-badge">3</div>
+            <div class="step-content">
+              <h4>⭐ Sistem Bintang & Altar Shrine Victory 🏆</h4>
+              <p>Jawaban salah akan mengikis ⭐. Selesaikan 5 Checkpoint lalu berjalanlah ke <strong>Altar Knowledge Shrine</strong> untuk tamat map & unlock Rank berikutnya!</p>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-primary modal-close-btn-action">UNDERSTOOD! 🚀</button>
+          <button class="btn btn-primary btn-large btn-glow modal-close-btn-action" style="width: 100%;">
+            <span>SIAP BERMAIN! 🚀</span>
+          </button>
         </div>
       </div>
     </div>
 
     <!-- About Modal -->
     <div id="about-modal" class="modal-overlay hidden">
-      <div class="modal-card">
+      <div class="modal-card pretty-modal-card">
         <div class="modal-header">
-          <h3>ℹ️ ABOUT THE GAME</h3>
+          <div class="modal-title-group">
+            <span class="modal-badge-pill">ℹ️ TENTANG GAME</span>
+            <h3>🧠 ABOUT KNOWLEDGE QUEST</h3>
+          </div>
           <button class="modal-close-btn">&times;</button>
         </div>
-        <div class="modal-body">
-          <p><strong>Uji Pengetahuan Umum: Rank Bronze to Mythic</strong> adalah web game trivia edukasi interaktif yang mengombinasikan pengetahuan akademis dengan sistem kompetitif game modern.</p>
-          <br>
-          <p>✔ <strong>No Login & Instant Play</strong>: Progress disimpan otomatis di browser (localStorage).<br>
-          ✔ <strong>60+ Soal Kuis Utama + Soal Preview Khusus Materi</strong> dari Sains, Sejarah, Logika, Bahasa, Teknologi, Geografi, dan Budaya.<br>
-          ✔ <strong>Timer Per Soal</strong>: Menantang kecepatan dan ketepatan berpikir.<br>
-          ✔ <strong>Mobile-First Design</strong>: Responsif dan nyaman dimainkan di HP, Tablet, maupun PC.</p>
+        <div class="modal-body fancy-modal-body">
+          <div class="about-hero-box">
+            <p><strong>KNOWLEDGE QUEST: Rank Bronze → Mythic</strong> adalah game 2D Top-Down Adventure Educational yang menggabungkan eksplorasi dunia adventure miniatur dengan tantangan kuis akademis kompetitif.</p>
+          </div>
+
+          <div class="about-features-grid">
+            <div class="about-feature-item">
+              <span class="feat-icon">⚡</span>
+              <div>
+                <strong>Instant Play & Auto Save</strong>
+                <p>Tanpa login. Progress rank & gerbang fisik tersimpan otomatis di browser.</p>
+              </div>
+            </div>
+
+            <div class="about-feature-item">
+              <span class="feat-icon">🗺️</span>
+              <div>
+                <strong>Single-Frame Map & Physical Gates</strong>
+                <p>Seluruh map terlihat utuh 1 layar tanpa camera scroll dengan gerbang fisik real-time.</p>
+              </div>
+            </div>
+
+            <div class="about-feature-item">
+              <span class="feat-icon">🏆</span>
+              <div>
+                <strong>6 Rank Progression</strong>
+                <p>Bronze Forest ➔ Silver Valley ➔ Gold City ➔ Diamond Campus ➔ Master Realm ➔ Mythic Realm.</p>
+              </div>
+            </div>
+
+            <div class="about-feature-item">
+              <span class="feat-icon">📱</span>
+              <div>
+                <strong>Responsive Controls</strong>
+                <p>Mendukung Keyboard (WASD / Panah) & Virtual D-Pad Layar Sentuh HP.</p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-primary modal-close-btn-action">CLOSE</button>
+          <button class="btn btn-primary btn-large modal-close-btn-action" style="width: 100%;">
+            <span>TUTUP INFORMASI</span>
+          </button>
         </div>
       </div>
     </div>
@@ -402,7 +426,7 @@
           <button class="modal-close-btn">&times;</button>
         </div>
         <div class="modal-body">
-          <p>Apakah kamu yakin ingin menghapus seluruh progress bermain? Semua Rank, Level, Stars, dan XP akan kembali ke <strong>🥉 Bronze Level 1</strong>.</p>
+          <p>Apakah kamu yakin ingin mereset seluruh progress game dari awal? Seluruh Rank (Silver — Mythic), total XP, Bintang, dan Gerbang akan dikunci kembali ke <strong>Bronze Forest Start Position</strong>.</p>
         </div>
         <div class="modal-footer">
           <button id="btn-cancel-reset" class="btn btn-secondary">BATAL</button>
@@ -411,27 +435,16 @@
       </div>
     </div>
 
-    <!-- Fullscreen Rank Up Celebratory Overlay -->
-    <div id="rank-up-overlay" class="modal-overlay rank-up-overlay hidden">
-      <canvas id="confetti-canvas"></canvas>
-      <div class="rank-up-card">
-        <div class="sparkle-title">✨ RANK UP! ✨</div>
-        <h1 class="rank-achieved-text" id="rank-up-name">GOLD ACHIEVED!</h1>
-        <div class="rank-up-character" id="rank-up-character-container"></div>
-        <p class="rank-up-dialogue" id="rank-up-speech">"LET'S GO! RANK BARU TELAH DIBUKA!"</p>
-        <button id="btn-continue-rankup" class="btn btn-primary btn-large btn-glow">
-          <span>CLAIM & CONTINUE ➔</span>
-        </button>
-      </div>
-    </div>
-
   </div>
 
-  <!-- JavaScript Scripts -->
+  <!-- JavaScript Modules -->
   <script src="js/questions.js"></script>
   <script src="js/character.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/storage.js"></script>
+  <script src="js/engine/map.js"></script>
+  <script src="js/engine/player.js"></script>
+  <script src="js/engine/checkpoints.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

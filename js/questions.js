@@ -1,860 +1,712 @@
-// Database Soal Uji Pengetahuan Umum: Rank Bronze to Mythic
-// Separated Databases:
-// 1. QUESTION_DATABASE (Soal Kuis Utama - 60 Soal)
-// 2. PREVIEW_QUESTION_DATABASE (Soal Khusus Halaman Materi & Preview - Berbeda dengan Kuis Utama)
+// KNOWLEDGE QUEST - Complete Question & Rank Database for All 6 Ranks
+// Ranks: Bronze (SD) -> Silver (SMP) -> Gold (SMA) -> Diamond (Kuliah) -> Master (Universitas) -> Mythic (Final Cosmic)
 
-const QUESTION_DATABASE = {
-  Bronze: [
-    {
-      id: "b1",
-      question: "Planet terbesar dalam sistem tata surya kita adalah...",
-      category: "🔬 Sains",
-      difficulty: "Bronze",
-      options: ["Bumi", "Mars", "Jupiter", "Venus"],
-      correctAnswer: "Jupiter",
-      explanation: "Jupiter adalah planet terbesar di tata surya dengan diameter sekitar 142.984 km, lebih dari 11 kali diameter Bumi.",
-      xp: 100
-    },
-    {
-      id: "b2",
-      question: "Hasil dari 15 + 27 - 12 adalah...",
-      category: "🧠 Logika & Matematika",
-      difficulty: "Bronze",
-      options: ["28", "30", "32", "35"],
-      correctAnswer: "30",
-      explanation: "15 + 27 = 42. Kemudian 42 - 12 = 30.",
-      xp: 100
-    },
-    {
-      id: "b3",
-      question: "Ibu kota negara Republik Indonesia yang berada di pulau Jawa adalah...",
-      category: "🌎 Geografi",
-      difficulty: "Bronze",
-      options: ["Surabaya", "Bandung", "Jakarta", "Medan"],
-      correctAnswer: "Jakarta",
-      explanation: "DKI Jakarta merupakan ibu kota sejarah dan pusat perekonomian Indonesia di pulau Jawa.",
-      xp: 100
-    },
-    {
-      id: "b4",
-      question: "Proses pembuatan makanan pada tumbuhan hijau dengan bantuan cahaya matahari disebut...",
-      category: "🔬 Sains",
-      difficulty: "Bronze",
-      options: ["Respirasi", "Fotosintesis", "Evaporasi", "Oksidasi"],
-      correctAnswer: "Fotosintesis",
-      explanation: "Fotosintesis memanfaatkan karbondioksida, air, dan cahaya matahari untuk menghasilkan glukosa dan oksigen.",
-      xp: 100
-    },
-    {
-      id: "b5",
-      question: "Mata uang resmi yang digunakan oleh negara Indonesia adalah...",
-      category: "🧩 Pengetahuan Umum",
-      difficulty: "Bronze",
-      options: ["Ringgit", "Rupiah", "Dollar", "Yen"],
-      correctAnswer: "Rupiah",
-      explanation: "Rupiah (IDR) adalah mata uang resmi Republik Indonesia yang diterbitkan oleh Bank Indonesia.",
-      xp: 100
-    },
-    {
-      id: "b6",
-      question: "Lagu kebangsaan negara Republik Indonesia adalah...",
-      category: "🎨 Budaya",
-      difficulty: "Bronze",
-      options: ["Garuda Pancasila", "Indonesia Raya", "Bagimu Negeri", "Halo-Halo Bandung"],
-      correctAnswer: "Indonesia Raya",
-      explanation: "Lagu Indonesia Raya diciptakan oleh W.R. Supratman dan pertama kali dimainkan pada Sumpah Pemuda tahun 1928.",
-      xp: 100
-    },
-    {
-      id: "b7",
-      question: "Kata baku yang benar menurut EBI (Ejaan Bahasa Indonesia) adalah...",
-      category: "📚 Bahasa Indonesia",
-      difficulty: "Bronze",
-      options: ["Apotik", "Apotek", "Apotekh", "Apotick"],
-      correctAnswer: "Apotek",
-      explanation: "Bentuk baku yang benar adalah 'Apotek' (menggunakan huruf e), seperti dalam kata turunan 'apoteker'.",
-      xp: 100
-    },
-    {
-      id: "b8",
-      question: "Hewan pemakan daging disebut juga hewan...",
-      category: "🔬 Sains",
-      difficulty: "Bronze",
-      options: ["Herbivora", "Karnivora", "Omnivora", "Insectivora"],
-      correctAnswer: "Karnivora",
-      explanation: "Karnivora adalah organisme yang utamanya memangsa dan memakan daging hewan lain (contoh: singa, harimau).",
-      xp: 100
-    },
-    {
-      id: "b9",
-      question: "Simbol Pancasila untuk sila ketiga 'Persatuan Indonesia' adalah...",
-      category: "🌍 Sejarah",
-      difficulty: "Bronze",
-      options: ["Bintang", "Rantai", "Pohon Beringin", "Kepala Banteng"],
-      correctAnswer: "Pohon Beringin",
-      explanation: "Sila 1 = Bintang, Sila 2 = Rantai, Sila 3 = Pohon Beringin, Sila 4 = Kepala Banteng, Sila 5 = Padi dan Kapas.",
-      xp: 100
-    },
-    {
-      id: "b10",
-      question: "Komponen komputer yang berfungsi sebagai otak utama pengolah data adalah...",
-      category: "💻 Teknologi Dasar",
-      difficulty: "Bronze",
-      options: ["RAM", "Harddisk", "CPU", "Monitor"],
-      correctAnswer: "CPU",
-      explanation: "CPU (Central Processing Unit) berfungsi mengolah instruksi dan data pada komputer.",
-      xp: 100
-    }
-  ],
+const BRONZE_CHECKPOINT_QUESTIONS = [
+  {
+    id: "b_q1",
+    checkpointNum: 1,
+    title: "CHECKPOINT 01 — SAINS",
+    category: "🔬 Sains Dasar",
+    difficulty: "Bronze",
+    question: "Planet terbesar dalam tata surya kita adalah...",
+    options: ["Bumi", "Mars", "Jupiter", "Venus"],
+    correctAnswer: "Jupiter",
+    explanation: "Jupiter adalah planet terbesar di tata surya dengan diameter lebih dari 11 kali diameter Bumi.",
+    xp: 100
+  },
+  {
+    id: "b_q2",
+    checkpointNum: 2,
+    title: "CHECKPOINT 02 — MATEMATIKA",
+    category: "🧠 Matematika Dasar",
+    difficulty: "Bronze",
+    question: "Berapakah hasil perkalian dari 8 × 7?",
+    options: ["48", "54", "56", "64"],
+    correctAnswer: "56",
+    explanation: "Perkalian perkalian dasar: 8 × 7 = 56.",
+    xp: 100
+  },
+  {
+    id: "b_q3",
+    checkpointNum: 3,
+    title: "CHECKPOINT 03 — BAHASA INDONESIA",
+    category: "📚 Bahasa Indonesia",
+    difficulty: "Bronze",
+    question: "Lawan kata (antonim) dari kata 'besar' adalah...",
+    options: ["Tinggi", "Kecil", "Panjang", "Lebar"],
+    correctAnswer: "Kecil",
+    explanation: "Lawan kata atau antonim dari 'besar' adalah 'kecil'.",
+    xp: 100
+  },
+  {
+    id: "b_q4",
+    checkpointNum: 4,
+    title: "CHECKPOINT 04 — PENGETAHUAN UMUM",
+    category: "🌍 Pengetahuan Umum",
+    difficulty: "Bronze",
+    question: "Bendera kebangsaan negara Indonesia terdiri dari dua warna, yaitu...",
+    options: ["Merah dan biru", "Merah dan putih", "Putih dan hijau", "Biru dan putih"],
+    correctAnswer: "Merah dan putih",
+    explanation: "Bendera Negara Sang Merah Putih terdiri dari warna merah di atas dan putih di bawah.",
+    xp: 100
+  },
+  {
+    id: "b_q5",
+    checkpointNum: 5,
+    title: "FINAL CHECKPOINT 05 — LOGIKA",
+    category: "🧩 Logika Sederhana",
+    difficulty: "Bronze Final",
+    question: "Jika semua kucing adalah hewan, dan Mimi adalah seekor kucing, maka Mimi adalah...",
+    options: ["Tumbuhan", "Hewan", "Benda Mati", "Planet"],
+    correctAnswer: "Hewan",
+    explanation: "Logika premis silogisme: Semua kucing adalah hewan. Mimi adalah kucing. Maka Mimi adalah hewan.",
+    xp: 150
+  }
+];
 
-  Silver: [
-    {
-      id: "s1",
-      question: "Jika persamaan 3x + 5 = 20 diselesaikan, berapa nilai x?",
-      category: "🧠 Logika & Matematika",
-      difficulty: "Silver",
-      options: ["3", "4", "5", "6"],
-      correctAnswer: "5",
-      explanation: "3x = 20 - 5 => 3x = 15 => x = 15 / 3 = 5.",
-      xp: 150
-    },
-    {
-      id: "s2",
-      question: "Candi Borobudur yang megah berlatar belakang agama Buddha didirikan pada masa kerajaan...",
-      category: "🌍 Sejarah",
-      difficulty: "Silver",
-      options: ["Majapahit", "Mataram Kuno", "Sriwijaya", "Singasari"],
-      correctAnswer: "Mataram Kuno",
-      explanation: "Candi Borobudur dibangun pada abad ke-8 hingga ke-9 Masehi oleh Wangsa Syailendra dari Kerajaan Mataram Kuno.",
-      xp: 150
-    },
-    {
-      id: "s3",
-      question: "Gas yang paling banyak mendominasi komposisi atmosfer Bumi adalah...",
-      category: "🔬 Sains",
-      difficulty: "Silver",
-      options: ["Oksigen", "Karbondioksida", "Nitrogen", "Hidrogen"],
-      correctAnswer: "Nitrogen",
-      explanation: "Nitrogen menyumbang sekitar 78% dari total volume atmosfer Bumi, diikuti Oksigen sekitar 21%.",
-      xp: 150
-    },
-    {
-      id: "s4",
-      question: "Organ tubuh manusia yang berfungsi memompa darah ke seluruh tubuh adalah...",
-      category: "🔬 Sains",
-      difficulty: "Silver",
-      options: ["Paru-paru", "Hati", "Jantung", "Ginjal"],
-      correctAnswer: "Jantung",
-      explanation: "Jantung bekerja tanpa henti memompa darah beroksigen dan kaya nutrisi ke seluruh sistem sirkulasi tubuh.",
-      xp: 150
-    },
-    {
-      id: "s5",
-      question: "Benua terbesar di dunia berdasarkan luas wilayah adalah...",
-      category: "🌎 Geografi",
-      difficulty: "Silver",
-      options: ["Afrika", "Amerika Utara", "Asia", "Eropa"],
-      correctAnswer: "Asia",
-      explanation: "Benua Asia memiliki luas sekitar 44,58 juta km², menjadikannya benua terbesar di dunia.",
-      xp: 150
-    },
-    {
-      id: "s6",
-      question: "Teks Proklamasi Kemerdekaan Indonesia diketik oleh...",
-      category: "🌍 Sejarah",
-      difficulty: "Silver",
-      options: ["Sayuti Melik", "Sukarni", "B.M. Diah", "Chaerul Saleh"],
-      correctAnswer: "Sayuti Melik",
-      explanation: "Sayuti Melik mengetik naskah proklamasi setelah dirumuskan oleh Soekarno, Hatta, dan Ahmad Soebardjo.",
-      xp: 150
-    },
-    {
-      id: "s7",
-      question: "Dalam jaringan komputer, kepanjangan dari URL adalah...",
-      category: "💻 Teknologi Dasar",
-      difficulty: "Silver",
-      options: ["Universal Record Locator", "Uniform Resource Locator", "United Resource Link", "Universal Reusable Link"],
-      correctAnswer: "Uniform Resource Locator",
-      explanation: "URL (Uniform Resource Locator) adalah alamat spesifik yang digunakan untuk mengakses sumber daya di internet.",
-      xp: 150
-    },
-    {
-      id: "s8",
-      question: "Alat pengukur tekanan udara di atmosfer dinamakan...",
-      category: "🔬 Sains",
-      difficulty: "Silver",
-      options: ["Termometer", "Barometer", "Higrometer", "Anemometer"],
-      correctAnswer: "Barometer",
-      explanation: "Barometer digunakan untuk mengukur tekanan udara. Anemometer untuk kecepatan angin, Higrometer untuk kelembapan.",
-      xp: 150
-    },
-    {
-      id: "s9",
-      question: "Majelis yang mengesahkan UUD 1945 pada tanggal 18 Agustus 1945 adalah...",
-      category: "🌍 Sejarah",
-      difficulty: "Silver",
-      options: ["BPUPKI", "PPKI", "KNIP", "MPRS"],
-      correctAnswer: "PPKI",
-      explanation: "PPKI (Panitia Persiapan Kemerdekaan Indonesia) menetapkan UUD 1945 serta memilih Soekarno dan Hatta sebagai Presiden & Wapres.",
-      xp: 150
-    },
-    {
-      id: "s10",
-      question: "Sudut lancip adalah sudut yang besarnya...",
-      category: "🧠 Logika & Matematika",
-      difficulty: "Silver",
-      options: ["Tepat 90 derajat", "Antara 0 dan 90 derajat", "Antara 90 dan 180 derajat", "Tepat 180 derajat"],
-      correctAnswer: "Antara 0 dan 90 derajat",
-      explanation: "Sudut lancip berukuran < 90°. Sudut siku-siku = 90°, sedangkan sudut tumpul berada antara 90° dan 180°.",
-      xp: 150
-    }
-  ],
+const SILVER_CHECKPOINT_QUESTIONS = [
+  {
+    id: "s_q1",
+    checkpointNum: 1,
+    title: "CHECKPOINT 01 — BIOLOGI (SMP)",
+    category: "🫀 Biologi Manusia",
+    difficulty: "Silver",
+    question: "Organ tubuh manusia yang berfungsi utama memompa darah ke seluruh tubuh adalah...",
+    options: ["Paru-paru", "Jantung", "Hati", "Ginjal"],
+    correctAnswer: "Jantung",
+    explanation: "Jantung adalah organ berotot yang memompa darah ke seluruh tubuh melalui pembuluh darah.",
+    xp: 150
+  },
+  {
+    id: "s_q2",
+    checkpointNum: 2,
+    title: "CHECKPOINT 02 — ALJABAR (SMP)",
+    category: "📐 Matematika Aljabar",
+    difficulty: "Silver",
+    question: "Jika 2x + 5 = 15, berapakah nilai dari x?",
+    options: ["3", "4", "5", "6"],
+    correctAnswer: "5",
+    explanation: "Penyelesaian persamaan aljabar linier: 2x = 15 - 5 => 2x = 10 => x = 10 / 2 = 5.",
+    xp: 150
+  },
+  {
+    id: "s_q3",
+    checkpointNum: 3,
+    title: "CHECKPOINT 03 — SEJARAH INDONESIA",
+    category: "📜 Sejarah Kemerdekaan",
+    difficulty: "Silver",
+    question: "Teks Proklamasi Kemerdekaan Indonesia dibacakan oleh Ir. Soekarno pada tanggal...",
+    options: ["17 Agustus 1945", "28 Oktober 1928", "10 November 1945", "1 Juni 1945"],
+    correctAnswer: "17 Agustus 1945",
+    explanation: "Proklamasi Kemerdekaan Indonesia dibacakan di Jalan Pegangsaan Timur 56 Jakarta pada tanggal 17 Agustus 1945.",
+    xp: 150
+  },
+  {
+    id: "s_q4",
+    checkpointNum: 4,
+    title: "CHECKPOINT 04 — FISIKA (SMP)",
+    category: "⚡ Fisika Dasar",
+    difficulty: "Silver",
+    question: "Satuan Internasional (SI) untuk mengukur besar gaya adalah...",
+    options: ["Joule", "Watt", "Newton", "Pascal"],
+    correctAnswer: "Newton",
+    explanation: "Gaya diukur dalam satuan Newton (N), dinamai sesuai fisikawan Sir Isaac Newton.",
+    xp: 150
+  },
+  {
+    id: "s_q5",
+    checkpointNum: 5,
+    title: "FINAL CHECKPOINT 05 — GEOMETRI (SMP)",
+    category: "🧊 Bangun Ruang",
+    difficulty: "Silver Final",
+    question: "Sebuah kubus memiliki panjang rusuk 4 cm. Berapakah volume kubus tersebut?",
+    options: ["16 cm³", "32 cm³", "64 cm³", "128 cm³"],
+    correctAnswer: "64 cm³",
+    explanation: "Rumus volume kubus = s³ = 4 × 4 × 4 = 64 cm³.",
+    xp: 200
+  }
+];
 
-  Gold: [
-    {
-      id: "g1",
-      question: "Mengapa langit siang hari tampak berwarna biru?",
-      category: "🔬 Sains",
-      difficulty: "Gold",
-      options: [
-        "Air laut memantulkan warna biru ke atmosfer",
-        "Atmosfer menyerap semua spektrum warna kecuali biru",
-        "Cahaya biru berpanjang gelombang pendek lebih banyak tersebar oleh molekul udara (Hamburan Rayleigh)",
-        "Matahari memancarkan sinar ultraviolet berwarna biru"
-      ],
-      correctAnswer: "Cahaya biru berpanjang gelombang pendek lebih banyak tersebar oleh molekul udara (Hamburan Rayleigh)",
-      explanation: "Hamburan Rayleigh menyatakan cahaya dengan panjang gelombang lebih pendek (biru/nila) disebarkan lebih kuat oleh molekul gas di atmosfer.",
-      xp: 200
-    },
-    {
-      id: "g2",
-      question: "Peristiwa Rengasdengklok yang terjadi sebelum Proklamasi bertujuan untuk...",
-      category: "🌍 Sejarah",
-      difficulty: "Gold",
-      options: [
-        "Menghindari kejaran pasukan Belanda",
-        "Mendesak Soekarno-Hatta agar segera memproklamasikan kemerdekaan tanpa pengaruh Jepang",
-        "Menyusun naskah UUD 1945",
-        "Membentuk struktur kepolisian Republik Indonesia"
-      ],
-      correctAnswer: "Mendesak Soekarno-Hatta agar segera memproklamasikan kemerdekaan tanpa pengaruh Jepang",
-      explanation: "Para pemuda membawa Soekarno-Hatta ke Rengasdengklok untuk mengamankan mereka dari pengaruh janji Jepang dan mempercepat proklamasi.",
-      xp: 200
-    },
-    {
-      id: "g3",
-      question: "Diberikan deret aritmatika: 4, 9, 14, 19, ... Suku ke-20 dari deret tersebut adalah...",
-      category: "🧠 Logika & Matematika",
-      difficulty: "Gold",
-      options: ["94", "99", "104", "109"],
-      correctAnswer: "99",
-      explanation: "Suku awal a = 4, beda b = 5. Rumus suku ke-n: Un = a + (n-1)b = 4 + 19(5) = 4 + 95 = 99.",
-      xp: 200
-    },
-    {
-      id: "g4",
-      question: "Zat kimia pengantar sinyal antar sel saraf (neuron) pada sistem saraf manusia disebut...",
-      category: "🔬 Sains",
-      difficulty: "Gold",
-      options: ["Hormon", "Enzim", "Neurotransmiter", "Antibodi"],
-      correctAnswer: "Neurotransmiter",
-      explanation: "Neurotransmiter (seperti dopamin dan serotonin) adalah molekul yang mentransmisikan sinyal melintasi celah sinapsis antar sel saraf.",
-      xp: 200
-    },
-    {
-      id: "g5",
-      question: "Protokol keamanan jaringan yang mengenkripsi komunikasi pada situs web (ditandai ikon gembok) adalah...",
-      category: "💻 Teknologi Dasar",
-      difficulty: "Gold",
-      options: ["HTTP", "HTTPS / SSL-TLS", "FTP", "SMTP"],
-      correctAnswer: "HTTPS / SSL-TLS",
-      explanation: "HTTPS (Hypertext Transfer Protocol Secure) menggunakan inskripsi TLS/SSL untuk mengamankan pertukaran data pada web.",
-      xp: 200
-    },
-    {
-      id: "g6",
-      question: "Organel sel yang dijuluki 'Powerhouse of the Cell' karena menghasilkan ATP adalah...",
-      category: "🔬 Sains",
-      difficulty: "Gold",
-      options: ["Ribosom", "Lisosom", "Mitokondria", "Badan Golgi"],
-      correctAnswer: "Mitokondria",
-      explanation: "Mitokondria tempat berlangsungnya respirasi seluler yang menghasilkan energi kimia berupa ATP.",
-      xp: 200
-    },
-    {
-      id: "g7",
-      question: "Tokoh sastra Indonesia pengarang novel fenomenal 'Laskar Pelangi' adalah...",
-      category: "📚 Bahasa Indonesia",
-      difficulty: "Gold",
-      options: ["Pramoedya Ananta Toer", "Andrea Hirata", "Tere Liye", "A.A. Navis"],
-      correctAnswer: "Andrea Hirata",
-      explanation: "Andrea Hirata adalah penulis novel Laskar Pelangi yang menceritakan perjuangan anak-anak di Belitung.",
-      xp: 200
-    },
-    {
-      id: "g8",
-      question: "Selatan Pulau Jawa berbatasan langsung dengan samudra luas yaitu...",
-      category: "🌎 Geografi",
-      difficulty: "Gold",
-      options: ["Samudra Pasifik", "Samudra Hindia", "Samudra Atlantik", "Samudra Arktik"],
-      correctAnswer: "Samudra Hindia",
-      explanation: "Bagian selatan wilayah kepulauan Indonesia berbatasan langsung dengan perairan Samudra Hindia.",
-      xp: 200
-    },
-    {
-      id: "g9",
-      question: "Sistem pemerintahan di mana kekuasaan tertinggi berada di tangan rakyat disebut...",
-      category: "🧩 Pengetahuan Umum",
-      difficulty: "Gold",
-      options: ["Monarki", "Oligarki", "Demokrasi", "Teokrasi"],
-      correctAnswer: "Demokrasi",
-      explanation: "Demokrasi berasal dari bahasa Yunani (demos = rakyat, kratos = kekuasaan), berarti pemerintahan dari, oleh, dan untuk rakyat.",
-      xp: 200
-    },
-    {
-      id: "g10",
-      question: "Penghargaan Nobel bidang perdamaian dunia diserahkan di kota...",
-      category: "🧩 Pengetahuan Umum",
-      difficulty: "Gold",
-      options: ["Stockholm, Swedia", "Oslo, Norwegia", "Geneva, Swiss", "London, Inggris"],
-      correctAnswer: "Oslo, Norwegia",
-      explanation: "Kecuali Nobel Perdamaian yang diberikan di Oslo (Norwegia), penghargaan Nobel lainnya diserahkan di Stockholm (Swedia).",
-      xp: 200
-    }
-  ],
+const GOLD_CHECKPOINT_QUESTIONS = [
+  {
+    id: "g_q1",
+    checkpointNum: 1,
+    title: "CHECKPOINT 01 — FISIKA (SMA)",
+    category: "🏎️ Kinematika Vektor",
+    difficulty: "Gold",
+    question: "Kecepatan didefinisikan sebagai perubahan...",
+    options: ["Jarak terhadap massa", "Posisi (perpindahan) terhadap waktu", "Gaya terhadap percepatan", "Massa terhadap energi"],
+    correctAnswer: "Posisi (perpindahan) terhadap waktu",
+    explanation: "Kecepatan adalah besaran vektor yang menunjukkan perubahan posisi (perpindahan) benda per satuan waktu.",
+    xp: 200
+  },
+  {
+    id: "g_q2",
+    checkpointNum: 2,
+    title: "CHECKPOINT 02 — KIMIA (SMA)",
+    category: "🧪 Tabel Periodik",
+    difficulty: "Gold",
+    question: "Unsur kimia dengan lambang 'Au' dalam tabel periodik adalah...",
+    options: ["Perak (Silver)", "Emas (Gold)", "Tembaga (Copper)", "Aluminium"],
+    correctAnswer: "Emas (Gold)",
+    explanation: "Lambang 'Au' berasal dari bahasa Latin 'Aurum' yang berarti Emas.",
+    xp: 200
+  },
+  {
+    id: "g_q3",
+    checkpointNum: 3,
+    title: "CHECKPOINT 03 — BIOLOGI SEL (SMA)",
+    category: "🧬 Genetika & Sel",
+    difficulty: "Gold",
+    question: "Organel sel yang dikenal sebagai 'powerhouse of the cell' penyuplai energi ATP adalah...",
+    options: ["Ribosom", "Lisosom", "Mitokondria", "Badan Golgi"],
+    correctAnswer: "Mitokondria",
+    explanation: "Mitokondria menghasilkan ATP melalui proses respirasi seluler.",
+    xp: 200
+  },
+  {
+    id: "g_q4",
+    checkpointNum: 4,
+    title: "CHECKPOINT 04 — TRIGONOMETRI (SMA)",
+    category: "📐 Matematika Trigonometri",
+    difficulty: "Gold",
+    question: "Nilai dari sin(30°) adalah...",
+    options: ["0", "1/2", "√2/2", "√3/2"],
+    correctAnswer: "1/2",
+    explanation: "Nilai sudut istimewa trigonometri: sin(30°) = 0,5 atau 1/2.",
+    xp: 200
+  },
+  {
+    id: "g_q5",
+    checkpointNum: 5,
+    title: "FINAL CHECKPOINT 05 — LOGIKA ANALITIS",
+    category: "🧠 Penalaran Analitis",
+    difficulty: "Gold Final",
+    question: "Jika P ➔ Q bernilai Benar, dan Q bernilai Salah, maka nilai kebenaran P adalah...",
+    options: ["Benar", "Salah", "Bisa Benar atau Salah", "Tidak Dapat Ditentukan"],
+    correctAnswer: "Salah",
+    explanation: "Implikasi P ➔ Q hanya bernilai Salah jika P Benar dan Q Salah. Karena implikasi Benar dan Q Salah, P HARUS Salah (Modus Tollens).",
+    xp: 250
+  }
+];
 
-  Diamond: [
-    {
-      id: "d1",
-      question: "Pernyataan mana yang secara logis EKUIVALEN dengan implikasi 'Jika hujan deras, maka jalanan basah' (p → q)?",
-      category: "🧠 Logika & Matematika",
-      difficulty: "Diamond",
-      options: [
-        "Jika jalanan basah, maka hujan deras (Konvers)",
-        "Jika jalanan tidak basah, maka tidak hujan deras (Kontraposisi)",
-        "Jika tidak hujan deras, maka jalanan tidak basah (Invers)",
-        "Jalanan basah hanya saat hujan deras"
-      ],
-      correctAnswer: "Jika jalanan tidak basah, maka tidak hujan deras (Kontraposisi)",
-      explanation: "Secara logika formal, pernyataan implikasi (p → q) selalu bernilai kebenaran sama dengan kontraposisinya (~q → ~p).",
-      xp: 250
-    },
-    {
-      id: "d2",
-      question: "Fenomena fisika di mana gelombang cahaya membengkok saat melewati celah sempit disebut...",
-      category: "🔬 Sains",
-      difficulty: "Diamond",
-      options: ["Refraksi", "Difraksi", "Dispersi", "Interferensi"],
-      correctAnswer: "Difraksi",
-      explanation: "Difraksi adalah pelengkungan atau penyebaran gelombang saat melewati halangan atau celah sempit.",
-      xp: 250
-    },
-    {
-      id: "d3",
-      question: "Perbedaan utama antara struktur sel tumbuhan dan sel hewan adalah sel tumbuhan memiliki...",
-      category: "🔬 Sains",
-      difficulty: "Diamond",
-      options: [
-        "Dinding sel dan Kloroplas",
-        "Membran sel dan Mitokondria",
-        "Ribosom dan Retikulum Endoplasma",
-        "Lisosom dan Sentriol"
-      ],
-      correctAnswer: "Dinding sel dan Kloroplas",
-      explanation: "Sel tumbuhan memiliki dinding sel kaku (selulosa) dan kloroplas untuk fotosintesis yang tidak dimiliki sel hewan.",
-      xp: 250
-    },
-    {
-      id: "d4",
-      question: "Dalam arsitektur komputer & jaringan, struktur data Stack bekerja berdasarkan prinsip...",
-      category: "💻 Teknologi Dasar",
-      difficulty: "Diamond",
-      options: ["FIFO (First In First Out)", "LIFO (Last In First Out)", "Random Access", "Priority Queue"],
-      correctAnswer: "LIFO (Last In First Out)",
-      explanation: "Stack (tumpukan) menerapkan prinsip LIFO: elemen yang terakhir dimasukkan akan menjadi yang pertama dikeluarkan.",
-      xp: 250
-    },
-    {
-      id: "d5",
-      question: "Konferensi Asia-Afrika (KAA) pertama yang melahirkan Dasasila Bandung diselenggarakan pada tahun...",
-      category: "🌍 Sejarah",
-      difficulty: "Diamond",
-      options: ["1945", "1950", "1955", "1960"],
-      correctAnswer: "1955",
-      explanation: "KAA berlangsung pada 18-24 April 1955 di Gedung Merdeka, Bandung, dihadiri 29 negara Asia dan Afrika.",
-      xp: 250
-    },
-    {
-      id: "d6",
-      question: "Unsur kimia berwujud cair pada suhu kamar (25°C) selain Raksa (Hg) adalah...",
-      category: "🔬 Sains",
-      difficulty: "Diamond",
-      options: ["Bromin (Br)", "Galium (Ga)", "Klorin (Cl)", "Yodium (I)"],
-      correctAnswer: "Bromin (Br)",
-      explanation: "Hanya dua unsur pada tabel periodik berwujud cair pada suhu kamar standar: Raksa (logam) dan Bromin (non-logam).",
-      xp: 250
-    },
-    {
-      id: "d7",
-      question: "Sebuah bus melaju dengan kecepatan 72 km/jam. Kecepatan bus tersebut jika dikonversi ke m/s adalah...",
-      category: "🧠 Logika & Matematika",
-      difficulty: "Diamond",
-      options: ["15 m/s", "20 m/s", "25 m/s", "30 m/s"],
-      correctAnswer: "20 m/s",
-      explanation: "72 km/jam = (72 x 1000m) / 3600s = 72000 / 3600 = 20 m/s (atau cukup bagi 3.6).",
-      xp: 250
-    },
-    {
-      id: "d8",
-      question: "Peristiwa krisis ekonomi dunia yang melanda pada tahun 1929 dan dikenal sebagai 'The Great Depression' bermula di negara...",
-      category: "🌍 Sejarah",
-      difficulty: "Diamond",
-      options: ["Inggris", "Jerman", "Amerika Serikat", "Prancis"],
-      correctAnswer: "Amerika Serikat",
-      explanation: "Great Depression dipicu oleh kejatuhan bursa saham Wall Street pada 'Black Tuesday', 29 Oktober 1929 di New York, AS.",
-      xp: 250
-    },
-    {
-      id: "d9",
-      question: "Penetapan garis bujur nol derajat (Prime Meridian) disepakati secara internasional melewati kota...",
-      category: "🌎 Geografi",
-      difficulty: "Diamond",
-      options: ["Paris, Prancis", "Greenwich, Inggris", "Washington D.C., AS", "Tokyo, Jepang"],
-      correctAnswer: "Greenwich, Inggris",
-      explanation: "Observatorium Kerajaan di Greenwich, London dipilih sebagai patokan garis Meridian Nol (0° Bujur) pada tahun 1884.",
-      xp: 250
-    },
-    {
-      id: "d10",
-      question: "Istilah 'Artificial Intelligence' pertama kali dicetuskan pada Konferensi Dartmouth tahun 1956 oleh...",
-      category: "💻 Teknologi Dasar",
-      difficulty: "Diamond",
-      options: ["Alan Turing", "John McCarthy", "Claude Shannon", "Marvin Minsky"],
-      correctAnswer: "John McCarthy",
-      explanation: "John McCarthy menciptakan istilah Artificial Intelligence (AI) dan memelopori pengembangannya di MIT.",
-      xp: 250
-    }
-  ],
+const DIAMOND_CHECKPOINT_QUESTIONS = [
+  {
+    id: "d_q1",
+    checkpointNum: 1,
+    title: "CHECKPOINT 01 — ALGORITMA & STRUKTUR DATA",
+    category: "💻 Ilmu Komputer",
+    difficulty: "Diamond",
+    question: "Struktur data LIFO (Last-In, First-Out) di mana elemen terakhir yang masuk adalah yang pertama keluar dinamakan...",
+    options: ["Queue", "Stack", "Linked List", "Tree"],
+    correctAnswer: "Stack",
+    explanation: "Stack menggunakan prinsip LIFO (seperti tumpukan piring), sedangkan Queue menggunakan prinsip FIFO.",
+    xp: 250
+  },
+  {
+    id: "d_q2",
+    checkpointNum: 2,
+    title: "CHECKPOINT 02 — SAINS POPULER & KOSMOLOGI",
+    category: "🌌 Astrofisika",
+    difficulty: "Diamond",
+    question: "Kecepatan cahaya dalam ruang hampa udara adalah sekitar...",
+    options: ["300.000 km/detik", "150.000 km/detik", "1.000.000 km/detik", "30.000 km/detik"],
+    correctAnswer: "300.000 km/detik",
+    explanation: "Kecepatan cahaya c diukur mendekati 299.792.458 m/s atau sekitar 300.000 km/detik.",
+    xp: 250
+  },
+  {
+    id: "d_q3",
+    checkpointNum: 3,
+    title: "CHECKPOINT 03 — LOGIKA DEDUKTIF",
+    category: "🧩 Logika Formal",
+    difficulty: "Diamond",
+    question: "Aturan inferensi: 'Jika P ➔ Q' dan 'P Benar', maka kesimpulannya 'Q Benar'. Aturan ini disebut...",
+    options: ["Modus Ponens", "Modus Tollens", "Silogisme Hipotetis", "Dilema Konstruktif"],
+    correctAnswer: "Modus Ponens",
+    explanation: "Modus Ponens (Metode Mengafirmasi) menyatakan jika premis mayor P ➔ Q benar dan premis minor P benar, maka Q harus benar.",
+    xp: 250
+  },
+  {
+    id: "d_q4",
+    checkpointNum: 4,
+    title: "CHECKPOINT 04 — TEKNOLOGI INFORMASI",
+    category: "🌐 Sistem Jaringan",
+    difficulty: "Diamond",
+    question: "Protokol standar jaringan yang berfungsi menerjemahkan nama domain (seperti google.com) menjadi IP Address adalah...",
+    options: ["HTTP", "DNS", "FTP", "SMTP"],
+    correctAnswer: "DNS",
+    explanation: "DNS (Domain Name System) mengubah nama domain ramah manusia menjadi alamat IP numerik komputer.",
+    xp: 250
+  },
+  {
+    id: "d_q5",
+    checkpointNum: 5,
+    title: "FINAL CHECKPOINT 05 — PROBABILITAS & STATISTIKA",
+    category: "📊 Teori Peluang",
+    difficulty: "Diamond Final",
+    question: "Peluang munculnya angka 6 saat melempar satu buah dadu adil bernilai...",
+    options: ["1/2", "1/4", "1/6", "1/36"],
+    correctAnswer: "1/6",
+    explanation: "Dadu memiliki 6 sisi seimbang. Peluang setiap satu sisi muncul adalah 1 dari 6 = 1/6.",
+    xp: 300
+  }
+];
 
-  Master: [
-    {
-      id: "m1",
-      question: "Teori fisika yang menyatakan bahwa hukum fisika bernilai sama untuk semua pengamat non-akselerasi dan kecepatan cahaya di ruang hampa konstan adalah...",
-      category: "🔬 Sains",
-      difficulty: "Master",
-      options: [
-        "Teori Relativitas Khusus (Albert Einstein)",
-        "Teori Kuantum Planck",
-        "Teori Gravitasi Universal Newton",
-        "Hukum Termodinamika Kedua"
-      ],
-      correctAnswer: "Teori Relativitas Khusus (Albert Einstein)",
-      explanation: "Relativitas Khusus (1905) diposisikan atas dua postulat utama Einstein mengenai kelajuan cahaya konstan (c) dan kerangka acuan inersia.",
-      xp: 300
-    },
-    {
-      id: "m2",
-      question: "Jika fungsi f(x) = 3x² - 4x + 7, maka turunan pertama f'(x) adalah...",
-      category: "🧠 Logika & Matematika",
-      difficulty: "Master",
-      options: ["6x - 4", "3x - 4", "6x + 7", "6x² - 4"],
-      correctAnswer: "6x - 4",
-      explanation: "Menggunakan aturan pangkat turunan d/dx(x^n) = n*x^(n-1): f'(x) = 3(2x) - 4(1) + 0 = 6x - 4.",
-      xp: 300
-    },
-    {
-      id: "m3",
-      question: "Dalam biokimia sel, enzim bekerja sebagai biokatalisator dengan cara...",
-      category: "🔬 Sains",
-      difficulty: "Master",
-      options: [
-        "Meningkatkan energi aktivasi reaksi",
-        "Menurunkan energi aktivasi reaksi",
-        "Mengubah konstanta kesetimbangan reaksi",
-        "Menambah jumlah produk akhir reaksi"
-      ],
-      correctAnswer: "Menurunkan energi aktivasi reaksi",
-      explanation: "Enzim mempercepat laju reaksi kimia dengan cara menurunkan batas energi aktivasi yang diperlukan agar reaksi dimulai.",
-      xp: 300
-    },
-    {
-      id: "m4",
-      question: "Filsuf Yunani Kuno yang dikenal sebagai bapak metode dialektika dan tidak meninggalkan karya tulis sendiri adalah...",
-      category: "🧩 Pengetahuan Umum",
-      difficulty: "Master",
-      options: ["Plato", "Sokrates", "Aristoteles", "Pythagoras"],
-      correctAnswer: "Sokrates",
-      explanation: "Sokrates mengajar melalui diskusi/tanya jawab (metode Sokratik) dan pemikirannya dicatat oleh muridnya, Plato.",
-      xp: 300
-    },
-    {
-      id: "m5",
-      question: "Algoritma pencarian terpendek dalam graf berbobot positif (seperti pada sistem navigasi GPS) dikembangkan oleh...",
-      category: "💻 Teknologi Dasar",
-      difficulty: "Master",
-      options: ["Edsger W. Dijkstra", "Tim Berners-Lee", "Donald Knuth", "Ada Lovelace"],
-      correctAnswer: "Edsger W. Dijkstra",
-      explanation: "Algoritma Dijkstra menemukan jalur terpendek antara simpul-simpul dalam graf berbobot non-negatif.",
-      xp: 300
-    },
-    {
-      id: "m6",
-      question: "Perjanjian Westphalia pada tahun 1648 sangat bersejarah dalam hubungan internasional karena melahirkan konsep...",
-      category: "🌍 Sejarah",
-      difficulty: "Master",
-      options: [
-        "Kedaulatan negara bangsa modern (Nation-State Sovereignty)",
-        "Hak Asasi Manusia Universal",
-        "Sistem Ekonomi Pasar Bebas",
-        "Organisasi Perserikatan Bangsa-Bangsa"
-      ],
-      correctAnswer: "Kedaulatan negara bangsa modern (Nation-State Sovereignty)",
-      explanation: "Perjanjian Westphalia mengakhiri Perang 30 Tahun di Eropa dan menjadi fondasi hukum kedaulatan negara-bangsa modern.",
-      xp: 300
-    },
-    {
-      id: "m7",
-      question: "Nilai pH larutan netral pada suhu 25°C adalah 7. Jika suatu larutan memiliki konsentrasi ion H⁺ sebesar 10⁻⁴ M, maka pH larutan tersebut adalah...",
-      category: "🔬 Sains",
-      difficulty: "Master",
-      options: ["3", "4", "7", "10"],
-      correctAnswer: "4",
-      explanation: "Rumus pH = -log[H⁺]. Maka pH = -log(10⁻⁴) = 4 (larutan bersifat asam).",
-      xp: 300
-    },
-    {
-      id: "m8",
-      question: "Dalam teori ekonomi makro, istilah 'Stagflasi' menggambarkan kondisi di mana terjadi...",
-      category: "🧩 Pengetahuan Umum",
-      difficulty: "Master",
-      options: [
-        "Pertumbuhan ekonomi cepat disertai inflasi rendah",
-        "Stagnasi ekonomi (pertumbuhan lambat/pengangguran tinggi) bersamaan dengan inflasi tinggi",
-        "Deflasi parah disertai penurunan suku bunga",
-        "Depresiasi nilai mata uang tanpa inflasi"
-      ],
-      correctAnswer: "Stagnasi ekonomi (pertumbuhan lambat/pengangguran tinggi) bersamaan dengan inflasi tinggi",
-      explanation: "Stagflasi adalah kombinasi stagnasi pertumbuhan ekonomi, pengangguran tinggi, dan inflasi (kenaikan harga) secara bersamaan.",
-      xp: 300
-    },
-    {
-      id: "m9",
-      question: "Siapakah ilmuwan wanita pertama yang memenangkan dua Hadiah Nobel dalam dua bidang sains berbeda (Fisika & Kimia)?",
-      category: "🔬 Sains",
-      difficulty: "Master",
-      options: ["Rosalind Franklin", "Marie Curie", "Ada Lovelace", "Dorothy Hodgkin"],
-      correctAnswer: "Marie Curie",
-      explanation: "Marie Curie meraih Nobel Fisika (1903) untuk riset radiasi dan Nobel Kimia (1911) atas penemuan polonium & radium.",
-      xp: 300
-    },
-    {
-      id: "m10",
-      question: "Proses transfer data antar blok dalam teknologi Blockchain dipastikan keabsahannya menggunakan mekanisme konsensus seperti...",
-      category: "💻 Teknologi Dasar",
-      difficulty: "Master",
-      options: [
-        "Proof of Work / Proof of Stake",
-        "Model OSI 7 Layer",
-        "Enkripsi Asimetris RSA 2048",
-        "DNS Round Robin"
-      ],
-      correctAnswer: "Proof of Work / Proof of Stake",
-      explanation: "Proof of Work (PoW) dan Proof of Stake (PoS) adalah mekanisme konsensus kriptografis untuk memvalidasi transaksi pada blockchain.",
-      xp: 300
-    }
-  ],
+const MASTER_CHECKPOINT_QUESTIONS = [
+  {
+    id: "m_q1",
+    checkpointNum: 1,
+    title: "CHECKPOINT 01 — KALKULUS TURUNAN",
+    category: "📐 Kalkulus Diferensial",
+    difficulty: "Master",
+    question: "Turunan pertama dari fungsi f(x) = 3x² + 5x - 7 terhadap x adalah...",
+    options: ["6x + 5", "3x + 5", "6x² + 5", "6x - 7"],
+    correctAnswer: "6x + 5",
+    explanation: "Menggunakan aturan pangkat turunan d/dx(ax^n) = n·a·x^(n-1): f'(x) = 2·3x + 5 = 6x + 5.",
+    xp: 300
+  },
+  {
+    id: "m_q2",
+    checkpointNum: 2,
+    title: "CHECKPOINT 02 — FILSAFAT ILMU",
+    category: "🏛️ Metodologi Ilmiah",
+    difficulty: "Master",
+    question: "Prinsip pemikiran Karl Popper yang menyatakan bahwa sebuah teori ilmiah harus dapat dibuktikan salah (diuji kelemahannya) disebut...",
+    options: ["Falsifikasi", "Verifikasi", "Induksi", "Empirisme Radikal"],
+    correctAnswer: "Falsifikasi",
+    explanation: "Karl Popper mengemukakan Falsifikasi: kriteria keilmiahan suatu teori adalah kemampuannya untuk dapat difalsifikasi (diuji salah).",
+    xp: 300
+  },
+  {
+    id: "m_q3",
+    checkpointNum: 3,
+    title: "CHECKPOINT 03 — METODE ILMIAH & METRIKS",
+    category: "📊 Statistika Inferensial",
+    difficulty: "Master",
+    question: "Nilai p-value < 0,05 dalam uji hipotesis ilmiah mengindikasikan bahwa...",
+    options: ["Hasil penelitian 95% salah", "Hasil signifikan secara statistik untuk menolak Hipotesis Nol (H0)", "Hipotesis Nol (H0) pasti benar", "Sampel kurang banyak"],
+    correctAnswer: "Hasil signifikan secara statistik untuk menolak Hipotesis Nol (H0)",
+    explanation: "P-value kurang dari alpha (0,05) memberikan bukti cukup untuk menolak Hipotesis Nol (H0) pada tingkat kepercayaan 95%.",
+    xp: 300
+  },
+  {
+    id: "m_q4",
+    checkpointNum: 4,
+    title: "CHECKPOINT 04 — TEORI GAME & EKONOMI",
+    category: "♟️ Game Theory",
+    difficulty: "Master",
+    question: "Kondisi di mana tidak ada pemain yang dapat memperoleh keuntungan lebih dengan mengubah strateginya sendiri secara unilateral disebut...",
+    options: ["Nash Equilibrium", "Pareto Efficiency", "Zero-Sum Game", "Dominant Strategy Trap"],
+    correctAnswer: "Nash Equilibrium",
+    explanation: "Keseimbangan Nash (Nash Equilibrium) dirumuskan oleh John Nash untuk menggambarkan stabilitas keputusan antar agen rasional.",
+    xp: 300
+  },
+  {
+    id: "m_q5",
+    checkpointNum: 5,
+    title: "FINAL CHECKPOINT 05 — BERPIKIR KRITIS & LOGIKA",
+    category: "🧠 Critical Problem Solving",
+    difficulty: "Master Final",
+    question: "Kesesatan berpikir (fallacy) di mana seseorang menyerang karakter/pribadi lawan bicara daripada argumennya dinamakan...",
+    options: ["Argumentum ad Hominem", "Strawman Fallacy", "Slippery Slope", "False Dilemma"],
+    correctAnswer: "Argumentum ad Hominem",
+    explanation: "Ad Hominem menyerang latar belakang atau kepribadian lawan bicara bukannya membahas validitas argumen yang disampaikan.",
+    xp: 400
+  }
+];
 
-  Mythic: [
-    {
-      id: "my1",
-      question: "Dalam Mekanika Kuantum, 'Prinsip Ketidakpastian' yang menyatakan bahwa posisi dan momentum partikel subatomik tidak dapat diukur secara simultan dengan presisi tak terbatas dirumuskan oleh...",
-      category: "🔬 Sains",
-      difficulty: "Mythic",
-      options: ["Erwin Schrödinger", "Werner Heisenberg", "Niels Bohr", "Niels Dirac"],
-      correctAnswer: "Werner Heisenberg",
-      explanation: "Prinsip Ketidakpastian Heisenberg (Δx · Δp ≥ ℏ/2) merupakan pilar utama mekanika kuantum kuantitatif.",
-      xp: 400
-    },
-    {
-      id: "my2",
-      question: "Berapa nilai dari matriks determinan | 2  3 | / | 1  5 | ?",
-      category: "🧠 Logika & Matematika",
-      difficulty: "Mythic",
-      options: ["5", "7", "10", "13"],
-      correctAnswer: "7",
-      explanation: "Determinan matriks 2x2 [[a,b],[c,d]] adalah (a*d - b*c). Maka (2*5 - 3*1) = 10 - 3 = 7.",
-      xp: 400
-    },
-    {
-      id: "my3",
-      question: "Masalah Matematika Milenium terbesar dalam ilmu komputer teoretis yang mempertanyakan apakah setiap masalah yang verifikasinya cepat juga dapat diselesaikan dengan cepat adalah...",
-      category: "🧠 Logika & Matematika",
-      difficulty: "Mythic",
-      options: [
-        "Hipotesis Riemann",
-        "Masalah P vs NP",
-        "Dugaan Poincaré",
-        "Teorema Terakhir Fermat"
-      ],
-      correctAnswer: "Masalah P vs NP",
-      explanation: "P vs NP menguji apakah masalah yang solusinya dapat diverifikasi dalam waktu polinomial (NP) juga dapat diselesaikan dalam waktu polinomial (P).",
-      xp: 400
-    },
-    {
-      id: "my4",
-      question: "Organisasi kesehatan dunia (WHO) secara resmi mengumumkan pembasmian total (eradication) penyakit menular mematikan ini pada tahun 1980 berkat vaksinasi global:",
-      category: "🔬 Sains",
-      difficulty: "Mythic",
-      options: ["Polio", "Cacar Ular (Smallpox / Variola)", "TBC", "Malaria"],
-      correctAnswer: "Cacar Ular (Smallpox / Variola)",
-      explanation: "Smallpox (Variola) adalah satu-satunya penyakit menular pada manusia yang berhasil dimusnahkan secara menyeluruh di muka bumi.",
-      xp: 400
-    },
-    {
-      id: "my5",
-      question: "Struktur bangunan kuno 'Library of Alexandria' yang menjadi pusat ilmu pengetahuan terbesar peradaban Yunani-Mesir didirikan di bawah pemerintahan dinasti...",
-      category: "🌍 Sejarah",
-      difficulty: "Mythic",
-      options: ["Dinasti Ptolemeus", "Dinasti Seleukia", "Dinasti Firaun Ramses", "Kekaisaran Bizantium"],
-      correctAnswer: "Dinasti Ptolemeus",
-      explanation: "Perpustakaan Alexandria didirikan pada awal abad ke-3 SM di bawah Ptolemeus I Soter atau Ptolemeus II Philadelphus.",
-      xp: 400
-    },
-    {
-      id: "my6",
-      question: "Dalam teori pemrosesan bahasa alami (NLP) & AI modern, arsitektur deep learning berteknologi 'Self-Attention' yang menjadi dasar ChatGPT adalah...",
-      category: "💻 Teknologi Dasar",
-      difficulty: "Mythic",
-      options: [
-        "Convolutional Neural Network (CNN)",
-        "Recurrent Neural Network (RNN)",
-        "Transformer (Vaswani et al., 2017)",
-        "Generative Adversarial Network (GAN)"
-      ],
-      correctAnswer: "Transformer (Vaswani et al., 2017)",
-      explanation: "Arsitektur Transformer ('Attention Is All You Need') merevolusi AI dengan mekanisme self-attention parallel tanpa pengulangan sekuensial RNN.",
-      xp: 400
-    },
-    {
-      id: "my7",
-      question: "Titik koordinat paling dalam di samudra bumi yang pernah diketahui manusia adalah 'Challenger Deep' yang terletak di...",
-      category: "🌎 Geografi",
-      difficulty: "Mythic",
-      options: ["Palung Sunda", "Palung Mariana", "Palung Puerto Riko", "Palung Jawa"],
-      correctAnswer: "Palung Mariana",
-      explanation: "Challenger Deep di Palung Mariana (Samudra Pasifik Barat) memiliki kedalaman maksimum sekitar 10.994 meter di bawah permukaan laut.",
-      xp: 400
-    },
-    {
-      id: "my8",
-      question: "Sebuah ruangan memiliki 5 pasang lampu. Berapa banyak kombinasi sakelar berbeda jika minimal ada 1 lampu yang harus menyala?",
-      category: "🧠 Logika & Matematika",
-      difficulty: "Mythic",
-      options: ["25", "31", "32", "64"],
-      correctAnswer: "31",
-      explanation: "Setiap sakelar punya 2 status (ON/OFF). Total kombinasi = 2⁵ = 32. Karena minimal 1 lampu harus menyala, kurangi 1 situasi saat semua OFF = 32 - 1 = 31.",
-      xp: 400
-    },
-    {
-      id: "my9",
-      question: "Konsep kosmologi fisik di mana alam semesta diperkirakan akan mengalami pendinginan total akibat penurunan entropi maksimum dikenal sebagai...",
-      category: "🔬 Sains",
-      difficulty: "Mythic",
-      options: ["Big Crunch", "Heat Death of the Universe (Big Freeze)", "Big Rip", "Multiverse Collapse"],
-      correctAnswer: "Heat Death of the Universe (Big Freeze)",
-      explanation: "Heat Death (Big Freeze) terjadi ketika entropi mencapai nilai maksimum dan tidak ada lagi energi bebas untuk melakukan kerja atau kehidupan.",
-      xp: 400
-    },
-    {
-      id: "my10",
-      question: "Prinsip Hukum Termodinamika Ketiga menyatakan bahwa nilai entropi kristal murni yang sempurna akan mendekati NOL saat suhu mencapai...",
-      category: "🔬 Sains",
-      difficulty: "Mythic",
-      options: ["0 derajat Celsius", "100 Kelvin", "Nol Mutlak (0 Kelvin / -273,15°C)", "-100 derajat Celsius"],
-      correctAnswer: "Nol Mutlak (0 Kelvin / -273,15°C)",
-      explanation: "Hukum Ketiga Termodinamika menyatakan entropi sistem yang teratur sempurna mendekati nol seiring suhu mendekati 0 K (Nol Mutlak).",
-      xp: 400
-    }
-  ]
-};
+const MYTHIC_CHECKPOINT_QUESTIONS = [
+  {
+    id: "my_q1",
+    checkpointNum: 1,
+    title: "CHECKPOINT 01 — MEKANIKA KUANTUM",
+    category: "🌌 Fisika Kuantum",
+    difficulty: "Mythic",
+    question: "Prinsip Ketidakpastian Heisenberg menyatakan bahwa kita tidak dapat menentukan secara bersamaan presisi tinggi dari...",
+    options: ["Posisi dan Momentum", "Massa dan Energi", "Waktu dan Suhu", "Muatan dan Spin"],
+    correctAnswer: "Posisi dan Momentum",
+    explanation: "Prinsip Heisenberg (Δx·Δp ≥ ℏ/2) membatasi ketelitian pengamatan simultan atas posisi dan momentum partikel subatomik.",
+    xp: 500
+  },
+  {
+    id: "my_q2",
+    checkpointNum: 2,
+    title: "CHECKPOINT 02 — TEORI INFORMASI",
+    category: "⚡ Komputasi Kuantum",
+    difficulty: "Mythic",
+    question: "Unit dasar informasi dalam komputer kuantum yang dapat berada dalam keadaan superposisi 0 dan 1 sekaligus adalah...",
+    options: ["Bit", "Qubit", "Byte", "Trit"],
+    correctAnswer: "Qubit",
+    explanation: "Qubit (Quantum Bit) memanipulasi fenomena superposisi dan keterkaitan kuantum (entanglement).",
+    xp: 500
+  },
+  {
+    id: "my_q3",
+    checkpointNum: 3,
+    title: "CHECKPOINT 03 — KOSMOLOGI KONTEMPORER",
+    category: "🔭 Kosmologi",
+    difficulty: "Mythic",
+    question: "Komponen terbesar penyusun massa-energi alam semesta (sekitar 68%) yang memicu laju pemuaian alam semesta dipercepat adalah...",
+    options: ["Materi Biasa (Baryonic)", "Materi Gelap (Dark Matter)", "Energi Gelap (Dark Energy)", "Radiasi Kosmik"],
+    correctAnswer: "Energi Gelap (Dark Energy)",
+    explanation: "Energi Gelap (Dark Energy) mencakup sekitar 68% energi alam semesta dan menghasilkan gaya tolak pemuaian kosmologis.",
+    xp: 500
+  },
+  {
+    id: "my_q4",
+    checkpointNum: 4,
+    title: "CHECKPOINT 04 — MATEMATIKA REKURSIP & LOGIKA",
+    category: "♾️ Teori Kompleksitas",
+    difficulty: "Mythic",
+    question: "Teori Ketidaklengkapan Gödel (Gödel's Incompleteness Theorems) membuktikan bahwa...",
+    options: ["Semua sistem matematika pasti sempurna", "Dalam sistem aksiomatik konsisten, selalu ada pernyataan yang benar namun tidak dapat dibuktikan di dalam sistem tersebut", "Komputer dapat menyelesaikan semua masalah", "Matematika tidak memiliki aturan"],
+    correctAnswer: "Dalam sistem aksiomatik konsisten, selalu ada pernyataan yang benar namun tidak dapat dibuktikan di dalam sistem tersebut",
+    explanation: "Kurt Gödel membuktikan batas fundamental matematika formal: tidak ada sistem aksiomatik yang cukup kompleks yang bisa konsisten sekaligus lengkap.",
+    xp: 500
+  },
+  {
+    id: "my_q5",
+    checkpointNum: 5,
+    title: "FINAL MYTHIC CHECKPOINT 05 — KNOWLEDGE REALM MASTER",
+    category: "🌌 Grand Finale",
+    difficulty: "Mythic Legend",
+    question: "Prinsip Ekuivalensi Massa-Energi Albert Einstein direpresentasikan melalui persamaan abadi...",
+    options: ["E = mc²", "F = ma", "PV = nRT", "E = hν"],
+    correctAnswer: "E = mc²",
+    explanation: "E = mc² menghubungkan massa (m) dan energi (E) dengan konstanta kecepatan cahaya (c), mendasari fisika nuklir modern.",
+    xp: 1000
+  }
+];
 
-// SOAL KHUSUS UNTUK HALAMAN MATERI & PREVIEW (BERBEDA DENGAN SOAL KUIS UTAMA)
 const PREVIEW_QUESTION_DATABASE = {
   Bronze: {
     id: "prev_b1",
-    question: "Planet tempat tinggal kita dan merupakan planet ketiga dari Matahari adalah...",
+    question: "Planet tempat tinggal manusia yang merupakan planet ketiga dari Matahari adalah...",
     category: "🔬 Sains Dasar",
     difficulty: "Bronze",
     options: ["Mars", "Bumi", "Venus", "Jupiter"],
     correctAnswer: "Bumi",
-    explanation: "Bumi adalah tempat tinggal kita dan merupakan satu-satunya planet yang diketahui memiliki kehidupan di tata surya.",
+    explanation: "Bumi adalah planet ketiga dari Matahari tempat tinggal manusia.",
     difficultyBadge: "🟢 EASY"
   },
   Silver: {
     id: "prev_s1",
-    question: "Jika 3x + 5 = 20, berapa nilai x yang memenuhi persamaan tersebut?",
-    category: "🧠 Matematika SMP",
+    question: "Gas utama yang dihirup oleh manusia saat bernapas untuk kebutuhan metabolisme tubuh adalah...",
+    category: "🫁 IPA SMP",
     difficulty: "Silver",
-    options: ["3", "5", "7", "10"],
-    correctAnswer: "5",
-    explanation: "3x = 20 - 5 => 3x = 15 => x = 15 / 3 = 5.",
+    options: ["Karbondioksida", "Oksigen", "Nitrogen", "Hidrogen"],
+    correctAnswer: "Oksigen",
+    explanation: "Oksigen dihirup saat respirasi untuk mengoksidasi zat makanan dan menghasilkan energi.",
     difficultyBadge: "🟡 MEDIUM"
   },
   Gold: {
     id: "prev_g1",
-    question: "Mengapa langit tampak berwarna biru terang pada siang hari yang cerah?",
-    category: "🔬 Fisika SMA",
+    question: "Proses pembuatan makanan pada tumbuhan hijau menggunakan sinar matahari dinamakan...",
+    category: "🌿 Biologi SMA",
     difficulty: "Gold",
-    options: [
-      "Air laut memantulkan warna biru ke atas langit",
-      "Atmosfer menyerap semua warna cahaya matahari kecuali biru",
-      "Cahaya biru berpanjang gelombang pendek lebih banyak tersebar oleh molekul udara (Hamburan Rayleigh)",
-      "Matahari memancarkan sinar utama berwarna biru"
-    ],
-    correctAnswer: "Cahaya biru berpanjang gelombang pendek lebih banyak tersebar oleh molekul udara (Hamburan Rayleigh)",
-    explanation: "Hamburan Rayleigh menyebabkan spektrum cahaya biru dengan gelombang pendek tersebar ke segala arah oleh gas atmosfer.",
-    difficultyBadge: "🟠 HARD"
+    options: ["Respirasi", "Fotosintesis", "Transpirasi", "Gutasi"],
+    correctAnswer: "Fotosintesis",
+    explanation: "Fotosintesis mengubah karbondioksida dan air menjadi glukosa dan oksigen dengan bantuan cahaya matahari.",
+    difficultyBadge: "🥇 HARD"
   },
   Diamond: {
     id: "prev_d1",
-    question: "Manakah struktur data yang bekerja dengan prinsip LIFO (Last In First Out)?",
-    category: "💻 Teknologi & Komputer",
+    question: "Struktur data FIFO (First-In, First-Out) dinamakan...",
+    category: "💻 Computer Science",
     difficulty: "Diamond",
-    options: ["Queue", "Stack", "Array", "Linked List"],
-    correctAnswer: "Stack",
-    explanation: "Stack (tumpukan) berprinsip LIFO: data yang dimasukkan paling akhir akan dikeluarkan paling pertama.",
-    difficultyBadge: "🟠 HARD+"
+    options: ["Stack", "Queue", "Tree", "Graph"],
+    correctAnswer: "Queue",
+    explanation: "Queue adalah antrean FIFO (yang pertama masuk adalah yang pertama keluar).",
+    difficultyBadge: "💎 ADVANCED"
   },
   Master: {
     id: "prev_m1",
-    question: "Jika fungsi f(x) = 3x² - 4x + 7, apakah turunan pertama f'(x)?",
-    category: "🧠 Kalkulus & Logika",
+    question: "Keseimbangan dalam Teori Game di mana tidak ada pemain yang dapat menambah keuntungan secara unilateral disebut...",
+    category: "♟️ Teori Game",
     difficulty: "Master",
-    options: ["6x - 4", "3x - 4", "6x + 7", "6x² - 4"],
-    correctAnswer: "6x - 4",
-    explanation: "Turunan dari 3x² adalah 6x, turunan dari -4x adalah -4, dan turunan dari konstanta 7 adalah 0. Maka f'(x) = 6x - 4.",
-    difficultyBadge: "🔴 EXTREME"
+    question: "Kondisi keseimbangan tersebut dinamakan...",
+    options: ["Nash Equilibrium", "Pareto Optimal", "Zero Sum", "Minimax"],
+    correctAnswer: "Nash Equilibrium",
+    explanation: "Nash Equilibrium menggambarkan stabilitas strategi rasional.",
+    difficultyBadge: "👑 EXPERT"
   },
   Mythic: {
     id: "prev_my1",
-    question: "Dalam mekanika kuantum, siapakah perumus Prinsip Ketidakpastian (Uncertainty Principle)?",
-    category: "🔬 Fisika Kuantum",
+    question: "Unit dasar informasi dalam komputasi kuantum yang memanfaatkan prinsip superposisi adalah...",
+    category: "🌌 Kuantum",
     difficulty: "Mythic",
-    options: ["Erwin Schrödinger", "Werner Heisenberg", "Niels Bohr", "Albert Einstein"],
-    correctAnswer: "Werner Heisenberg",
-    explanation: "Werner Heisenberg merumuskan Prinsip Ketidakpastian pada tahun 1927, menyatakan posisi dan momentum partikel kuantum tak bisa diukur simultan secara persis.",
+    options: ["Bit", "Qubit", "Byte", "Pixel"],
+    correctAnswer: "Qubit",
+    explanation: "Qubit adalah unit informasi kuantum.",
     difficultyBadge: "🌌 MYTHIC LEGEND"
   }
 };
 
-// Detail Silabus & Materi untuk setiap Rank (digunakan pada Halaman Materi & Preview)
 const RANK_DETAILS = {
   Bronze: {
     name: "BRONZE",
-    levelTitle: "Level SD",
+    mapTitle: "Bronze Forest Map",
+    levelTitle: "Level SD — Beginner Forest",
     badge: "🥉",
     color: "#cd7f32",
     bgGradient: "linear-gradient(135deg, rgba(205, 127, 50, 0.2), rgba(205, 127, 50, 0.05))",
     topics: [
-      "Matematika Dasar & Aritmatika",
-      "Pengetahuan Umum Sehari-hari",
-      "Bahasa Indonesia & Ejaan Baku",
-      "Sains Dasar & Alam Sekitar",
-      "Geografi Dasar Indonesia",
+      "Matematika Dasar",
+      "Sains Dasar",
+      "Bahasa Indonesia",
+      "Pengetahuan Umum",
       "Logika Sederhana"
     ],
-    sampleAbility: "Menjawab pertanyaan fakta sederhana, mengenal simbol negara, dan melakukan perhitungan aritmatika dasar.",
-    tip: "Pastikan kamu menguasai operasi hitung dasar (+ - x :) dan fakta umum lingkungan sekitar!",
-    difficultyBadge: "🟢 EASY"
+    checkpointIcon: "📖",
+    checkpointType: "Magical Book",
+    sampleAbility: "Menjelajah Bronze Forest, menjawab 5 checkpoint soal, dan membuka gerbang fisik menuju Knowledge Shrine.",
+    tip: "Jelajahi map dari Q1 hingga Q5. Gerbang fisik hanya akan terbuka setelah checkpoint sebelumnya selesai!",
+    difficultyBadge: "🟢 PLAYABLE MAP"
   },
   Silver: {
     name: "SILVER",
-    levelTitle: "Level SMP",
+    mapTitle: "Silver Valley Map",
+    levelTitle: "Level SMP — Knowledge Valley",
     badge: "🥈",
-    color: "#c0c0c0",
-    bgGradient: "linear-gradient(135deg, rgba(192, 192, 192, 0.2), rgba(192, 192, 192, 0.05))",
+    color: "#cbd5e1",
+    bgGradient: "linear-gradient(135deg, rgba(203, 213, 225, 0.2), rgba(203, 213, 225, 0.05))",
     topics: [
-      "Persamaan Aljabar Sederhana",
-      "Ilmu Pengetahuan Alam (IPA SMP)",
-      "Sejarah Kemerdekaan Indonesia",
-      "Dasar Jaringan & Teknologi",
-      "Geografi Dunia & Benua",
-      "Bahasa & Logika Penalaran"
+      "Biologi Manusia",
+      "Aljabar SMP",
+      "Sejarah Indonesia",
+      "Fisika Dasar",
+      "Geometri Ruang"
     ],
-    sampleAbility: "Mulai membutuhkan pemahaman konsep dan hubungan sebab-akibat, bukan sekadar menghafal.",
-    tip: "Jangan hanya menghafal nama, pelajari alasan dan latar belakang suatu peristiwa sains maupun sejarah!",
-    difficultyBadge: "🟡 MEDIUM"
+    checkpointIcon: "💎",
+    checkpointType: "Knowledge Crystal",
+    sampleAbility: "Menjelajah Silver Valley Map dengan tebing perak kristal & air terjun sapphire.",
+    tip: "Tingkat kesulitan kuis naik ke level SMP. Pelajari pembahasan di setiap checkpoint!",
+    difficultyBadge: "🥈 UNLOCKED MAP"
   },
   Gold: {
     name: "GOLD",
-    levelTitle: "Level SMA",
+    mapTitle: "Gold City Map",
+    levelTitle: "Level SMA — Academic City",
     badge: "🥇",
     color: "#ffd700",
     bgGradient: "linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.05))",
-    topics: [
-      "Deret & Penalaran Matematika",
-      "Fisika & Biologi Konseptual",
-      "Sejarah Peristiwa Dunia",
-      "Sastra & Tata Bahasa Indonesia",
-      "Sistem Kewarganegaraan & Demokrasi",
-      "Keamanan Siber & Protokol Web"
-    ],
-    sampleAbility: "Pertanyaan membutuhkan analisis konsep sains, manipulasi variabel, dan literasi tinggi.",
-    tip: "Perhatikan kata kunci dalam soal dan elimiassi opsi yang kurang logis sebelum memilih!",
-    difficultyBadge: "🟠 HARD"
+    topics: ["Fisika Vektor", "Kimia Unsur", "Biologi Sel", "Trigonometri", "Logika Analitis"],
+    checkpointIcon: "📚",
+    checkpointType: "Library Desk",
+    sampleAbility: "Menjelajah Gold City Map dengan jalan batu emas, perpustakaan, laboratorium, & museum.",
+    tip: "Soal mencakup materi SMA & logika analitis. Selesaikan Silver Valley terlebih dahulu!",
+    difficultyBadge: "🥇 UNLOCKED MAP"
   },
   Diamond: {
     name: "DIAMOND",
-    levelTitle: "Level Awal Kuliah",
+    mapTitle: "Diamond Campus Map",
+    levelTitle: "Level Kuliah — Knowledge Campus",
     badge: "💎",
     color: "#00f0ff",
     bgGradient: "linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(0, 240, 255, 0.05))",
-    topics: [
-      "Logika Formal & Kontraposisi",
-      "Fisika Gelombang & Biologi Sel",
-      "Struktur Data & Informatika",
-      "Sejarah Ekonomi & Geopolitik",
-      "Konversi Satuan & Kalkulasi Cepat",
-      "Sejarah Perkembangan AI"
-    ],
-    sampleAbility: "Membutuhkan pemikiran analitis presisi, pemahaman logika induktif/deduktif, dan pengetahuan sains modern.",
-    tip: "Gunakan aturan logika formal dan cermati detail tabel periodik serta pola matematika!",
-    difficultyBadge: "🟠 HARD+"
+    topics: ["Struktur Data", "Astrofisika", "Logika Deduktif", "Sistem Informasi", "Probabilitas"],
+    checkpointIcon: "🔬",
+    checkpointType: "Science Terminal",
+    sampleAbility: "Menjelajah Diamond Campus Map dengan gedung universitas, observatorium, & taman sains.",
+    tip: "Menguji logika formal & ilmu komputer tingkat tinggi.",
+    difficultyBadge: "💎 UNLOCKED MAP"
   },
   Master: {
     name: "MASTER",
-    levelTitle: "Level Universitas",
+    mapTitle: "Master Realm Map",
+    levelTitle: "Level Universitas — Academic Realm",
     badge: "👑",
     color: "#ff007f",
     bgGradient: "linear-gradient(135deg, rgba(255, 0, 127, 0.2), rgba(255, 0, 127, 0.05))",
-    topics: [
-      "Kalkulus & Turunan Fungsi",
-      "Teori Relativitas & Kuantum",
-      "Biokimia & Aktivasi Enzim",
-      "Filsafat & Metode Dialektika",
-      "Algoritma Graf & Konsensus Blockchain",
-      "Makroekonomi & Stagflasi"
-    ],
-    sampleAbility: "Menganalisis teori multidisiplin lanjutan, hukum matematika murni, serta prinsip sains mendalam.",
-    tip: "Fokus pada konsep hukum dasar fisika, kimia, serta struktur matematika murni!",
-    difficultyBadge: "🔴 EXTREME"
+    topics: ["Kalkulus Diferensial", "Filsafat Ilmu", "Statistika Inferensial", "Teori Game", "Critical Thinking"],
+    checkpointIcon: "🏛️",
+    checkpointType: "Ancient Statue",
+    sampleAbility: "Menjelajah Master Realm dengan menara ilmu pengetahuan & patung-patung mahakarya kuno.",
+    tip: "Tingkat akademik tinggi untuk menguji pemikiran kritis.",
+    difficultyBadge: "👑 UNLOCKED MAP"
   },
   Mythic: {
     name: "MYTHIC",
-    levelTitle: "Final Rank / Tersulit",
+    mapTitle: "Mythic Realm Map",
+    levelTitle: "Final Rank — The Knowledge Realm",
     badge: "🌌",
     color: "#a855f7",
     bgGradient: "linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(168, 85, 247, 0.05))",
-    topics: [
-      "Fisika Kuantum & Entropi Termodinamika",
-      "Aljabar Matriks & Problem P vs NP",
-      "Sejarah Peradaban Kuno & Epidemi Global",
-      "Deep Learning, NLP & AI Transformers",
-      "Kombinatorika Kompleks & Oseanografi",
-      "Critical Thinking & Problem Solving"
-    ],
-    sampleAbility: "Mampu memecahkan soal tingkat tertinggi yang menggabungkan berbagai konsep sains murni, logika teoretis, dan wawasan global.",
-    tip: "Hitung dengan teliti! Kombinasi konsep teoretis dan penalaran mendalam adalah kunci kemenangan di Mythic!",
-    difficultyBadge: "🌌 MYTHIC LEGEND"
+    topics: ["Mekanika Kuantum", "Komputasi Kuantum", "Kosmologi", "Teori Kompleksitas", "Massa-Energi Einstein"],
+    checkpointIcon: "🌌",
+    checkpointType: "Cosmic Portal",
+    sampleAbility: "Tantangan Puncak Mythic Legend dengan pulau-pulau melayang di alam semesta kosmik.",
+    tip: "Puncak pembuktian pengetahuan akademis tertinggi di Knowledge Quest!",
+    difficultyBadge: "🌌 FINAL LEGEND MAP"
   }
 };
+
+// Shuffling Utility & Question Replacement Bank for Knowledge Quest
+function shuffleArray(arr) {
+  const newArr = [...arr];
+  for (let i = newArr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+  }
+  return newArr;
+}
+
+const QUESTION_BANK = {
+  Bronze: {
+    1: [
+      { id: "b_q1_1", checkpointNum: 1, title: "CHECKPOINT 01 — SAINS", category: "🔬 Sains Dasar", difficulty: "Bronze", question: "Planet terbesar dalam tata surya kita adalah...", options: ["Bumi", "Mars", "Jupiter", "Venus"], correctAnswer: "Jupiter", explanation: "Jupiter adalah planet terbesar di tata surya dengan diameter 11x Bumi.", xp: 100 },
+      { id: "b_q1_2", checkpointNum: 1, title: "CHECKPOINT 01 — SAINS", category: "🔬 Sains Dasar", difficulty: "Bronze", question: "Gas yang dibutuhkan tumbuhan hijau untuk fotosintesis adalah...", options: ["Oksigen", "Karbondioksida", "Nitrogen", "Helium"], correctAnswer: "Karbondioksida", explanation: "Tumbuhan menyerap Karbondioksida (CO2) untuk fotosintesis.", xp: 100 },
+      { id: "b_q1_3", checkpointNum: 1, title: "CHECKPOINT 01 — SAINS", category: "🔬 Sains Dasar", difficulty: "Bronze", question: "Benda langit pencetus cahaya sendiri yang menjadi pusat tata surya adalah...", options: ["Bulan", "Matahari", "Komet", "Saturnus"], correctAnswer: "Matahari", explanation: "Matahari adalah bintang pusat tata surya.", xp: 100 }
+    ],
+    2: [
+      { id: "b_q2_1", checkpointNum: 2, title: "CHECKPOINT 02 — MATEMATIKA", category: "🧠 Matematika Dasar", difficulty: "Bronze", question: "Berapakah hasil perkalian dari 8 × 7?", options: ["48", "54", "56", "64"], correctAnswer: "56", explanation: "Perkalian dasar: 8 × 7 = 56.", xp: 100 },
+      { id: "b_q2_2", checkpointNum: 2, title: "CHECKPOINT 02 — MATEMATIKA", category: "🧠 Matematika Dasar", difficulty: "Bronze", question: "Berapakah hasil dari 9 × 6?", options: ["45", "54", "63", "52"], correctAnswer: "54", explanation: "Perkalian dasar: 9 × 6 = 54.", xp: 100 },
+      { id: "b_q2_3", checkpointNum: 2, title: "CHECKPOINT 02 — MATEMATIKA", category: "🧠 Matematika Dasar", difficulty: "Bronze", question: "Jika 15 apel dibagi rata kepada 3 anak, masing-masing mendapat...", options: ["3 apel", "4 apel", "5 apel", "6 apel"], correctAnswer: "5 apel", explanation: "Pembagian dasar: 15 ÷ 3 = 5.", xp: 100 }
+    ],
+    3: [
+      { id: "b_q3_1", checkpointNum: 3, title: "CHECKPOINT 03 — BAHASA INDONESIA", category: "📚 Bahasa Indonesia", difficulty: "Bronze", question: "Lawan kata (antonim) dari kata 'besar' adalah...", options: ["Tinggi", "Kecil", "Panjang", "Lebar"], correctAnswer: "Kecil", explanation: "Lawan kata besar adalah kecil.", xp: 100 },
+      { id: "b_q3_2", checkpointNum: 3, title: "CHECKPOINT 03 — BAHASA INDONESIA", category: "📚 Bahasa Indonesia", difficulty: "Bronze", question: "Persamaan kata (sinonim) dari kata 'pandai' adalah...", options: ["Cerdas", "Rajin", "Jujur", "Hemat"], correctAnswer: "Cerdas", explanation: "Sinonim pandai adalah cerdas.", xp: 100 },
+      { id: "b_q3_3", checkpointNum: 3, title: "CHECKPOINT 03 — BAHASA INDONESIA", category: "📚 Bahasa Indonesia", difficulty: "Bronze", question: "Kata tanya yang digunakan untuk menanyakan tempat adalah...", options: ["Siapa", "Kapan", "Di mana", "Mengapa"], correctAnswer: "Di mana", explanation: "Kata tanya 'di mana' untuk menanyakan lokasi tempat.", xp: 100 }
+    ],
+    4: [
+      { id: "b_q4_1", checkpointNum: 4, title: "CHECKPOINT 04 — PENGETAHUAN UMUM", category: "🌍 Pengetahuan Umum", difficulty: "Bronze", question: "Bendera kebangsaan negara Indonesia terdiri dari warna...", options: ["Merah dan biru", "Merah dan putih", "Putih dan hijau", "Biru dan putih"], correctAnswer: "Merah dan putih", explanation: "Bendera Indonesia adalah Merah Putih.", xp: 100 },
+      { id: "b_q4_2", checkpointNum: 4, title: "CHECKPOINT 04 — PENGETAHUAN UMUM", category: "🌍 Pengetahuan Umum", difficulty: "Bronze", question: "Ibu kota Negara Kesatuan Republik Indonesia saat ini adalah...", options: ["Surabaya", "Bandung", "Jakarta", "Medan"], correctAnswer: "Jakarta", explanation: "Ibu kota Indonesia adalah DKI Jakarta.", xp: 100 },
+      { id: "b_q4_3", checkpointNum: 4, title: "CHECKPOINT 04 — PENGETAHUAN UMUM", category: "🌍 Pengetahuan Umum", difficulty: "Bronze", question: "Lagu kebangsaan resmi negara Indonesia berjudul...", options: ["Garuda Pancasila", "Indonesia Raya", "Halo-Halo Bandung", "Bagimu Negeri"], correctAnswer: "Indonesia Raya", explanation: "Lagu kebangsaan adalah Indonesia Raya.", xp: 100 }
+    ],
+    5: [
+      { id: "b_q5_1", checkpointNum: 5, title: "FINAL CHECKPOINT 05 — LOGIKA", category: "🧩 Logika Sederhana", difficulty: "Bronze Final", question: "Jika semua kucing adalah hewan, dan Mimi adalah seekor kucing, maka Mimi adalah...", options: ["Tumbuhan", "Hewan", "Benda Mati", "Planet"], correctAnswer: "Hewan", explanation: "Logika silogisme: Mimi adalah kucing, maka Mimi hewan.", xp: 150 },
+      { id: "b_q5_2", checkpointNum: 5, title: "FINAL CHECKPOINT 05 — LOGIKA", category: "🧩 Logika Sederhana", difficulty: "Bronze Final", question: "Perhatikan pola angka: 2, 4, 6, 8, ... Angka selanjutnya adalah...", options: ["9", "10", "12", "14"], correctAnswer: "10", explanation: "Deret bertambah +2: 8 + 2 = 10.", xp: 150 },
+      { id: "b_q5_3", checkpointNum: 5, title: "FINAL CHECKPOINT 05 — LOGIKA", category: "🧩 Logika Sederhana", difficulty: "Bronze Final", question: "Jika hari ini hari Senin, maka 3 hari lagi adalah hari...", options: ["Rabu", "Kamis", "Jumat", "Sabtu"], correctAnswer: "Kamis", explanation: "Senin + 3 hari = Kamis.", xp: 150 }
+    ]
+  },
+  Silver: {
+    1: [
+      { id: "s_q1_1", checkpointNum: 1, title: "CHECKPOINT 01 — BIOLOGI (SMP)", category: "🫀 Biologi Manusia", difficulty: "Silver", question: "Organ tubuh manusia yang berfungsi utama memompa darah adalah...", options: ["Paru-paru", "Jantung", "Hati", "Ginjal"], correctAnswer: "Jantung", explanation: "Jantung memompa darah ke pembuluh darah.", xp: 150 },
+      { id: "s_q1_2", checkpointNum: 1, title: "CHECKPOINT 01 — BIOLOGI (SMP)", category: "🫀 Biologi Manusia", difficulty: "Silver", question: "Tempat pertukaran O2 dan CO2 pada paru-paru terjadi di...", options: ["Lambung", "Alveolus", "Jantung", "Usus"], correctAnswer: "Alveolus", explanation: "Alveolus adalah tempat pertukaran gas respirasi.", xp: 150 }
+    ],
+    2: [
+      { id: "s_q2_1", checkpointNum: 2, title: "CHECKPOINT 02 — ALJABAR (SMP)", category: "📐 Matematika Aljabar", difficulty: "Silver", question: "Jika 2x + 5 = 15, berapakah nilai dari x?", options: ["3", "4", "5", "6"], correctAnswer: "5", explanation: "2x = 10 => x = 5.", xp: 150 },
+      { id: "s_q2_2", checkpointNum: 2, title: "CHECKPOINT 02 — ALJABAR (SMP)", category: "📐 Matematika Aljabar", difficulty: "Silver", question: "Jika 3y - 4 = 11, berapakah nilai dari y?", options: ["4", "5", "6", "7"], correctAnswer: "5", explanation: "3y = 15 => y = 5.", xp: 150 }
+    ],
+    3: [
+      { id: "s_q3_1", checkpointNum: 3, title: "CHECKPOINT 03 — SEJARAH INDONESIA", category: "📜 Sejarah Kemerdekaan", difficulty: "Silver", question: "Teks Proklamasi Kemerdekaan Indonesia dibacakan pada tanggal...", options: ["17 Agustus 1945", "28 Oktober 1928", "10 November 1945", "1 Juni 1945"], correctAnswer: "17 Agustus 1945", explanation: "Dibacakan Ir. Soekarno 17 Agustus 1945.", xp: 150 },
+      { id: "s_q3_2", checkpointNum: 3, title: "CHECKPOINT 03 — SEJARAH INDONESIA", category: "📜 Sejarah Kemerdekaan", difficulty: "Silver", question: "Peristiwa Sumpah Pemuda diikrarkan pada tanggal...", options: ["20 Mei 1908", "28 Oktober 1928", "17 Agustus 1945", "10 November 1945"], correctAnswer: "28 Oktober 1928", explanation: "Sumpah Pemuda 28 Oktober 1928.", xp: 150 }
+    ],
+    4: [
+      { id: "s_q4_1", checkpointNum: 4, title: "CHECKPOINT 04 — FISIKA (SMP)", category: "⚡ Fisika Dasar", difficulty: "Silver", question: "Satuan Internasional (SI) untuk mengukur besar gaya adalah...", options: ["Joule", "Watt", "Newton", "Pascal"], correctAnswer: "Newton", explanation: "Gaya diukur dalam Newton.", xp: 150 },
+      { id: "s_q4_2", checkpointNum: 4, title: "CHECKPOINT 04 — FISIKA (SMP)", category: "⚡ Fisika Dasar", difficulty: "Silver", question: "Rumus energi kinetik benda bermassa m dan kecepatan v adalah...", options: ["Ek = m·g·h", "Ek = 1/2 m·v²", "Ek = F·s", "Ek = P·t"], correctAnswer: "Ek = 1/2 m·v²", explanation: "Ek = 1/2 m v².", xp: 150 }
+    ],
+    5: [
+      { id: "s_q5_1", checkpointNum: 5, title: "FINAL CHECKPOINT 05 — GEOMETRI (SMP)", category: "🧊 Bangun Ruang", difficulty: "Silver Final", question: "Sebuah kubus memiliki panjang rusuk 4 cm. Volume kubus adalah...", options: ["16 cm³", "32 cm³", "64 cm³", "128 cm³"], correctAnswer: "64 cm³", explanation: "Volume kubus = 4³ = 64 cm³.", xp: 200 },
+      { id: "s_q5_2", checkpointNum: 5, title: "FINAL CHECKPOINT 05 — GEOMETRI (SMP)", category: "🧊 Bangun Ruang", difficulty: "Silver Final", question: "Luas lingkaran dengan jari-jari r = 7 cm (π = 22/7) adalah...", options: ["44 cm²", "154 cm²", "308 cm²", "616 cm²"], correctAnswer: "154 cm²", explanation: "Luas = 22/7 × 49 = 154 cm².", xp: 200 }
+    ]
+  },
+  Gold: {
+    1: [
+      { id: "g_q1_1", checkpointNum: 1, title: "CHECKPOINT 01 — FISIKA (SMA)", category: "🏎️ Kinematika Vektor", difficulty: "Gold", question: "Kecepatan didefinisikan sebagai perubahan...", options: ["Jarak terhadap massa", "Posisi (perpindahan) terhadap waktu", "Gaya terhadap percepatan", "Massa terhadap energi"], correctAnswer: "Posisi (perpindahan) terhadap waktu", explanation: "v = dx/dt.", xp: 200 },
+      { id: "g_q1_2", checkpointNum: 1, title: "CHECKPOINT 01 — FISIKA (SMA)", category: "🏎️ Kinematika Vektor", difficulty: "Gold", question: "Hukum II Newton menyatakan hubungan gaya F, massa m, percepatan a...", options: ["F = m / a", "F = m · a", "F = m + a", "F = m · v²"], correctAnswer: "F = m · a", explanation: "F = m·a.", xp: 200 }
+    ],
+    2: [
+      { id: "g_q2_1", checkpointNum: 2, title: "CHECKPOINT 02 — KIMIA (SMA)", category: "🧪 Tabel Periodik", difficulty: "Gold", question: "Unsur kimia dengan lambang 'Au' dalam tabel periodik adalah...", options: ["Perak", "Emas", "Tembaga", "Aluminium"], correctAnswer: "Emas", explanation: "Au = Aurum (Emas).", xp: 200 },
+      { id: "g_q2_2", checkpointNum: 2, title: "CHECKPOINT 02 — KIMIA (SMA)", category: "🧪 Tabel Periodik", difficulty: "Gold", question: "Nilai pH larutan netral pada suhu 25°C adalah...", options: ["0", "7", "14", "1"], correctAnswer: "7", explanation: "pH air netral = 7.", xp: 200 }
+    ],
+    3: [
+      { id: "g_q3_1", checkpointNum: 3, title: "CHECKPOINT 03 — BIOLOGI SEL (SMA)", category: "🧬 Genetika & Sel", difficulty: "Gold", question: "Organel sel penyuplai energi ATP ('powerhouse of cell') adalah...", options: ["Ribosom", "Lisosom", "Mitokondria", "Badan Golgi"], correctAnswer: "Mitokondria", explanation: "Mitokondria tempat pembentukan ATP.", xp: 200 },
+      { id: "g_q3_2", checkpointNum: 3, title: "CHECKPOINT 03 — BIOLOGI SEL (SMA)", category: "🧬 Genetika & Sel", difficulty: "Gold", question: "Basa nitrogen yang HANYA terdapat pada RNA tetapi TIDAK ada pada DNA adalah...", options: ["Adenin", "Timin", "Urasil", "Guanin"], correctAnswer: "Urasil", explanation: "RNA mengganti Timin dengan Urasil.", xp: 200 }
+    ],
+    4: [
+      { id: "g_q4_1", checkpointNum: 4, title: "CHECKPOINT 04 — TRIGONOMETRI (SMA)", category: "📐 Matematika Trigonometri", difficulty: "Gold", question: "Nilai dari sin(30°) adalah...", options: ["0", "1/2", "√2/2", "√3/2"], correctAnswer: "1/2", explanation: "sin(30°) = 0,5.", xp: 200 },
+      { id: "g_q4_2", checkpointNum: 4, title: "CHECKPOINT 04 — TRIGONOMETRI (SMA)", category: "📐 Matematika Trigonometri", difficulty: "Gold", question: "Nilai dari cos(60°) adalah...", options: ["1/2", "√3/2", "0", "1"], correctAnswer: "1/2", explanation: "cos(60°) = 0,5.", xp: 200 }
+    ],
+    5: [
+      { id: "g_q5_1", checkpointNum: 5, title: "FINAL CHECKPOINT 05 — LOGIKA ANALITIS", category: "🧠 Penalaran Analitis", difficulty: "Gold Final", question: "Jika P ➔ Q Benar dan Q Salah, maka nilai kebenaran P adalah...", options: ["Benar", "Salah", "Bisa Benar/Salah", "Tak Ditentukan"], correctAnswer: "Salah", explanation: "Modus Tollens: P harus Salah.", xp: 250 },
+      { id: "g_q5_2", checkpointNum: 5, title: "FINAL CHECKPOINT 05 — LOGIKA ANALITIS", category: "🧠 Penalaran Analitis", difficulty: "Gold Final", question: "Jika semua mahasiswa rajin belajar, dan Andi adalah mahasiswa, kesimpulannya...", options: ["Andi malas", "Andi rajin belajar", "Andi lulus", "Andi pandai"], correctAnswer: "Andi rajin belajar", explanation: "Silogisme kategoris.", xp: 250 }
+    ]
+  },
+  Diamond: {
+    1: [
+      { id: "d_q1_1", checkpointNum: 1, title: "CHECKPOINT 01 — ALGORITMA", category: "💻 Ilmu Komputer", difficulty: "Diamond", question: "Struktur data LIFO (Last-In, First-Out) dinamakan...", options: ["Queue", "Stack", "Linked List", "Tree"], correctAnswer: "Stack", explanation: "Stack memakai LIFO.", xp: 250 },
+      { id: "d_q1_2", checkpointNum: 1, title: "CHECKPOINT 01 — ALGORITMA", category: "💻 Ilmu Komputer", difficulty: "Diamond", question: "Kompleksitas waktu rata-rata Binary Search pada array terurut adalah...", options: ["O(1)", "O(n)", "O(log n)", "O(n²)"], correctAnswer: "O(log n)", explanation: "Binary search O(log n).", xp: 250 }
+    ],
+    2: [
+      { id: "d_q2_1", checkpointNum: 2, title: "CHECKPOINT 02 — KOSMOLOGI", category: "🌌 Astrofisika", difficulty: "Diamond", question: "Kecepatan cahaya dalam ruang hampa udara c adalah...", options: ["300.000 km/s", "150.000 km/s", "1.000.000 km/s", "30.000 km/s"], correctAnswer: "300.000 km/s", explanation: "c ≈ 300.000 km/s.", xp: 250 }
+    ],
+    3: [
+      { id: "d_q3_1", checkpointNum: 3, title: "CHECKPOINT 03 — LOGIKA DEDUKTIF", category: "🧩 Logika Formal", difficulty: "Diamond", question: "Aturan inferensi 'Jika P ➔ Q' dan 'P Benar' maka 'Q Benar' disebut...", options: ["Modus Ponens", "Modus Tollens", "Silogisme", "Dilema"], correctAnswer: "Modus Ponens", explanation: "Modus Ponens.", xp: 250 }
+    ],
+    4: [
+      { id: "d_q4_1", checkpointNum: 4, title: "CHECKPOINT 04 — JARINGAN", category: "🌐 Sistem Jaringan", difficulty: "Diamond", question: "Protokol penerjemah nama domain menjadi IP Address dinamakan...", options: ["HTTP", "DNS", "FTP", "SMTP"], correctAnswer: "DNS", explanation: "DNS menerjemahkan domain ke IP.", xp: 250 }
+    ],
+    5: [
+      { id: "d_q5_1", checkpointNum: 5, title: "FINAL CHECKPOINT 05 — PROBABILITAS", category: "📊 Teori Peluang", difficulty: "Diamond Final", question: "Peluang muncul angka 6 saat melempar satu dadu adil adalah...", options: ["1/2", "1/4", "1/6", "1/36"], correctAnswer: "1/6", explanation: "Peluang = 1/6.", xp: 300 }
+    ]
+  },
+  Master: {
+    1: [
+      { id: "m_q1_1", checkpointNum: 1, title: "CHECKPOINT 01 — KALKULUS", category: "📐 Kalkulus Diferensial", difficulty: "Master", question: "Turunan pertama f(x) = 3x² + 5x - 7 adalah...", options: ["6x + 5", "3x + 5", "6x² + 5", "6x - 7"], correctAnswer: "6x + 5", explanation: "f'(x) = 6x + 5.", xp: 300 }
+    ],
+    2: [
+      { id: "m_q2_1", checkpointNum: 2, title: "CHECKPOINT 02 — FILSAFAT ILMU", category: "🏛️ Metodologi Ilmiah", difficulty: "Master", question: "Prinsip Karl Popper bahwa teori ilmiah harus dapat dibuktikan salah disebut...", options: ["Falsifikasi", "Verifikasi", "Induksi", "Empirisme"], correctAnswer: "Falsifikasi", explanation: "Falsifikasi Popper.", xp: 300 }
+    ],
+    3: [
+      { id: "m_q3_1", checkpointNum: 3, title: "CHECKPOINT 03 — STATISTIKA", category: "📊 Statistika Inferensial", difficulty: "Master", question: "P-value < 0,05 mengindikasikan...", options: ["Hasil signifikan menolak H0", "Hasil 95% salah", "H0 pasti benar", "Kurang sampel"], correctAnswer: "Hasil signifikan menolak H0", explanation: "P-value < 0,05 menolak H0.", xp: 300 }
+    ],
+    4: [
+      { id: "m_q4_1", checkpointNum: 4, title: "CHECKPOINT 04 — TEORI GAME", category: "♟️ Game Theory", difficulty: "Master", question: "Kondisi tak ada pemain bisa menguntungkan diri secara unilateral adalah...", options: ["Nash Equilibrium", "Pareto Optimal", "Zero Sum", "Minimax"], correctAnswer: "Nash Equilibrium", explanation: "Nash Equilibrium.", xp: 300 }
+    ],
+    5: [
+      { id: "m_q5_1", checkpointNum: 5, title: "FINAL CHECKPOINT 05 — CRITICAL THINKING", category: "🧠 Problem Solving", difficulty: "Master Final", question: "Kesesatan berpikir menyerang pribadi lawan dinamakan...", options: ["Argumentum ad Hominem", "Strawman", "Slippery Slope", "False Dilemma"], correctAnswer: "Argumentum ad Hominem", explanation: "Ad Hominem.", xp: 400 }
+    ]
+  },
+  Mythic: {
+    1: [
+      { id: "my_q1_1", checkpointNum: 1, title: "CHECKPOINT 01 — MEKANIKA KUANTUM", category: "🌌 Fisika Kuantum", difficulty: "Mythic", question: "Prinsip Ketidakpastian Heisenberg membatasi ketelitian...", options: ["Posisi dan Momentum", "Massa dan Energi", "Waktu dan Suhu", "Muatan dan Spin"], correctAnswer: "Posisi dan Momentum", explanation: "Heisenberg: posisi & momentum.", xp: 500 }
+    ],
+    2: [
+      { id: "my_q2_1", checkpointNum: 2, title: "CHECKPOINT 02 — KOMPUTASI KUANTUM", category: "⚡ Komputasi Kuantum", difficulty: "Mythic", question: "Unit dasar komputer kuantum berprinsip superposisi adalah...", options: ["Bit", "Qubit", "Byte", "Trit"], correctAnswer: "Qubit", explanation: "Qubit (Quantum Bit).", xp: 500 }
+    ],
+    3: [
+      { id: "my_q3_1", checkpointNum: 3, title: "CHECKPOINT 03 — KOSMOLOGI", category: "🔭 Kosmologi", difficulty: "Mythic", question: "Komponen 68% energi pemuaian dipercepat alam semesta adalah...", options: ["Dark Matter", "Dark Energy", "Baryon", "Radiasi"], correctAnswer: "Dark Energy", explanation: "Dark Energy.", xp: 500 }
+    ],
+    4: [
+      { id: "my_q4_1", checkpointNum: 4, title: "CHECKPOINT 04 — TEORI KOMPLEKSITAS", category: "♾️ Teori Kompleksitas", difficulty: "Mythic", question: "Teori Ketidaklengkapan Gödel membuktikan...", options: ["Dalam sistem aksiomatik konsisten selalu ada pernyataan benar yang tak dapat dibuktikan di dalam sistem", "Semua sistem sempurna", "Komputer serba bisa", "Tidak ada aturan"], correctAnswer: "Dalam sistem aksiomatik konsisten selalu ada pernyataan benar yang tak dapat dibuktikan di dalam sistem", explanation: "Teorema Gödel.", xp: 500 }
+    ],
+    5: [
+      { id: "my_q5_1", checkpointNum: 5, title: "FINAL CHECKPOINT 05 — GRAND FINALE", category: "🌌 Grand Finale", difficulty: "Mythic Legend", question: "Persamaan Ekuivalensi Massa-Energi Einstein adalah...", options: ["E = mc²", "F = ma", "PV = nRT", "E = hν"], correctAnswer: "E = mc²", explanation: "E = mc².", xp: 1000 }
+    ]
+  }
+};
+
+function getRandomizedQuestions(rank = 'Bronze') {
+  const bank = QUESTION_BANK[rank] || QUESTION_BANK.Bronze;
+  const result = [];
+
+  for (let cpId = 1; cpId <= 5; cpId++) {
+    const list = bank[cpId] || bank[1];
+    const picked = list[Math.floor(Math.random() * list.length)];
+    result.push({
+      ...picked,
+      options: shuffleArray(picked.options)
+    });
+  }
+
+  return result;
+}
+
+function getReplacementQuestion(rank = 'Bronze', checkpointNum = 1, currentQuestionId = null) {
+  const bank = QUESTION_BANK[rank] || QUESTION_BANK.Bronze;
+  const cpList = bank[checkpointNum] || bank[1];
+
+  const candidates = cpList.filter(q => q.id !== currentQuestionId);
+  const selected = (candidates.length > 0)
+    ? candidates[Math.floor(Math.random() * candidates.length)]
+    : cpList[Math.floor(Math.random() * cpList.length)];
+
+  return {
+    ...selected,
+    options: shuffleArray(selected.options)
+  };
+}
+
+
